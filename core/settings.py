@@ -16,15 +16,6 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-CORS_ORIGIN_WHITELIST = [
-    'https://nainah.yotohosting.tk',
-    # Add other trusted origins if needed
-]
-
-CORS_ALLOWED_ORIGINS = [
-    'https://nainah.yotohosting.tk',
-    # Add other trusted origins if needed
-]
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -39,7 +30,14 @@ ALLOWED_HOSTS = ['*']
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-CSRF_ALLOWED_ORIGINS = ['*']
+CSRF_ALLOWED_ORIGINS = [
+    'https://nainah.yotohosting.tk',
+]
+
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://nainah.yotohosting.tk',
+]
 
 # Application definition
 
