@@ -21,7 +21,7 @@ class Order(models.Model):
         (REFOUNDED, 'Refounded'),
         (CANCELED, 'Canceled'),
     )
-
+    
     name = models.CharField(max_length=100)
     email = models.EmailField()
     address = models.TextField()
@@ -31,8 +31,17 @@ class Order(models.Model):
     updated = models.DateTimeField(auto_now=True)
     paid = models.BooleanField(default=False)
 
-    pais = CountryField(multiple=True)
+    country = CountryField(multiple=True)
     
+    delivery_option = models.CharField(
+        max_length=20,
+        choices=(
+            ('delivery', 'Delivery'),
+            ('store_pickup', 'Store Pickup')
+        ),
+        default='delivery'
+    )
+
     status = models.CharField(max_length=2, choices=ORDER_STATUS_CHOICES, default=PENDING)
 
     class Meta:

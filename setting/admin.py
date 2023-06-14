@@ -1,6 +1,11 @@
 from django.contrib import admin
-from .models import Setting
+from .models import Setting, SiteMeta
 
-# Register your models here.
+class InlineSiteMeta(admin.StackedInline):
+    model = SiteMeta
+    extra = 1
 
-admin.site.register(Setting)
+@admin.register(Setting)
+class SettingAdmin(admin.ModelAdmin):
+    inlines = [InlineSiteMeta,]
+    list_display = ('site_name', 'site_description', 'site_logo')

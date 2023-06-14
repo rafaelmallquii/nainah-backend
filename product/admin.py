@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
-from .models import Product, Tag, ProductImage, MetaAttribute, ProductVariant
+from .models import Product, Tag, MetaAttribute, ProductVariant
 
 from .forms import ProductForm
 
@@ -8,14 +8,8 @@ from .forms import ProductForm
 
 admin.site.register(Tag)
 
-class ProductImageInline(admin.TabularInline):
-    model = ProductImage
-    extra = 1
-
-    readonly_fields = ['show_image']
-
-    def show_image(self, obj):
-        return mark_safe('<img src="{url}" width="100px" />'.format(url=obj.image.url))
+# def show_image(self, obj):
+#         return mark_safe('<img src="{url}" width="100px" />'.format(url=obj.image.url))
 
 
 class MetaAttributeInline(admin.TabularInline):
@@ -27,7 +21,6 @@ class ProductVariantInline(admin.StackedInline):
     model = ProductVariant
     extra = 1
 
-
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     
@@ -38,10 +31,9 @@ class ProductAdmin(admin.ModelAdmin):
 
     date_hierarchy = 'created_at'
 
-    readonly_fields = ('current_image', )
+    # readonly_fields = ('current_image', )
 
     inlines = [
-        ProductImageInline,
         ProductVariantInline,
         MetaAttributeInline,
     ]
@@ -58,9 +50,9 @@ class ProductAdmin(admin.ModelAdmin):
     make_trending.short_description = "Mark selected products as trending"
     unmake_trending.short_description = "Unmark all products as trending"
 
-    list_display = ['name', 'price', 'show_image', 'category', 'enabled']
-    search_fields = ['name', 'price']
-    list_filter = ['price', 'category', 'enabled', 'trending']
+    list_display = ['name', 'category', 'enabled']
+    search_fields = ['name',]
+    list_filter = ['category', 'enabled', 'trending']
 
     list_per_page = 10
 

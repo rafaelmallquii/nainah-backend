@@ -39,6 +39,10 @@ CSRF_TRUSTED_ORIGINS = [
     'https://nainah.yotohosting.tk',
 ]
 
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
+
 # Application definition
 
 DJANGO_APPS = [
@@ -56,6 +60,7 @@ THIRD_PARTY_APPS = [
     'ckeditor',
     'colorfield',
     'rest_framework',
+    'debug_toolbar',
 ]
 
 LOCAL_APPS = [
@@ -82,6 +87,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'core.urls'
