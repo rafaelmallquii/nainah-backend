@@ -14,14 +14,6 @@ chartjs.type = 'text/javascript'
 
 document.body.appendChild(chartjs)
 
-// const form = document.getElementById('customer_form')
-
-// const inputs = Array.from(form.querySelectorAll('input[type="password"]'))
-
-
-// inputs.forEach((input) => {
-//   input.classList.add('vTextField')
-// })
 
 
 const importer = (src, attr = {}) => {
