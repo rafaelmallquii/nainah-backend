@@ -26,6 +26,7 @@ class Product(models.Model):
     description = RichTextField(default='Product Description')
 
     color = models.CharField(max_length=100, choices=COLOR_CHOICES, blank=True, null=True)
+    # array field
     size = models.CharField(max_length=100, choices=SIZE_CHOICES, blank=True, null=True)
     
     price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00, validators=[validator_price])
@@ -51,11 +52,14 @@ class Product(models.Model):
 class ProductVariant(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
 
+    title = models.CharField(max_length=100, default='Product Title')
+
     color = models.CharField(max_length=100,choices=COLOR_CHOICES, blank=True, null=True)
     size = models.CharField(max_length=100, choices=SIZE_CHOICES, blank=True, null=True)
     
+    stock = models.PositiveBigIntegerField(default=0)
+    
     price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00, validators=[validator_price])
-
     image = models.ImageField(upload_to='images/products')
 
     def current_image(self):

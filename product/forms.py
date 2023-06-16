@@ -9,5 +9,13 @@ class ProductForm(forms.ModelForm):
         widgets = {
             'enabled': forms.CheckboxInput(attrs={'class': 'my-checkbox-enabled'}),
             'trending': forms.CheckboxInput(attrs={'class': 'my-checkbox'}),
-         
+            
+        }
+
+class InlineProductForm(forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = '__all__'
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'my-title-input'}),
         }

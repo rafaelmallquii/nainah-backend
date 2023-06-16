@@ -2,11 +2,12 @@ from django.contrib import admin
 from .models import Product, Tag, MetaAttribute, ProductVariant
 
 from django.utils.safestring import mark_safe
-from .forms import ProductForm
+from .forms import ProductForm, InlineProductForm
 
 # Register your models here.
 
 admin.site.register(Tag)
+
 
 # def show_image(self, obj):
 #         return mark_safe('<img src="{url}" width="100px" />'.format(url=obj.image.url))
@@ -18,6 +19,7 @@ class MetaAttributeInline(admin.TabularInline):
 
 
 class ProductVariantInline(admin.StackedInline):
+    form = InlineProductForm
     model = ProductVariant
     extra = 1
     
@@ -72,4 +74,4 @@ class ProductAdmin(admin.ModelAdmin):
         css = {
             'all': ('css/widgets/checkbox.css',)
         }
-        js = ('js/widgets/checkbox.js',)
+        js = ('js/widgets/checkbox.js', 'js/widgets/copyvalues.js')
