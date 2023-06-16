@@ -275,3 +275,15 @@ JAZZMIN_UI_TWEAKS = {
 
 # default auth user model
 AUTH_USER_MODEL = 'customer.Customer'
+
+# ckeditor
+CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
+
+CKEDITOR_CONFIGS = {
+    'default': {
+         'height': 250,
+         'width': 350,
+         "removePlugins": 'exportpdf',
+         
+    }
+}

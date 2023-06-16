@@ -52,7 +52,7 @@ class Product(models.Model):
 class ProductVariant(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
 
-    title = models.CharField(max_length=100, default='Product Title')
+    title = models.CharField(max_length=100)
 
     color = models.CharField(max_length=100,choices=COLOR_CHOICES, blank=True, null=True)
     size = models.CharField(max_length=100, choices=SIZE_CHOICES, blank=True, null=True)

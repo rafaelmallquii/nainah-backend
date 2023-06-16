@@ -4,13 +4,8 @@ from .models import Product, Tag, MetaAttribute, ProductVariant
 from django.utils.safestring import mark_safe
 from .forms import ProductForm, InlineProductForm
 
-# Register your models here.
 
 admin.site.register(Tag)
-
-
-# def show_image(self, obj):
-#         return mark_safe('<img src="{url}" width="100px" />'.format(url=obj.image.url))
 
 
 class MetaAttributeInline(admin.TabularInline):
@@ -22,12 +17,13 @@ class ProductVariantInline(admin.StackedInline):
     form = InlineProductForm
     model = ProductVariant
     extra = 1
-    
+
     readonly_fields = ['current_image',]
+
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    
+
     form = ProductForm
 
     actions_on_bottom = True
@@ -62,8 +58,8 @@ class ProductAdmin(admin.ModelAdmin):
 
     list_per_page = 10
 
-
     # change html of field trending
+
     def trending(self, obj):
         if obj.trending:
             return mark_safe('<span style="color: green;">Yes</span>')
