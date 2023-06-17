@@ -281,9 +281,9 @@ CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
 
 CKEDITOR_CONFIGS = {
     'default': {
-         'height': 250,
-         'width': 350,
+         'skin': 'moono',
+         'height': '350px',
+         'width': '100%',
          "removePlugins": 'exportpdf',
-         
-    }
+    },
 }

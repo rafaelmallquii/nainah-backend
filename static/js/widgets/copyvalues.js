@@ -9,15 +9,19 @@ function getElementsByXpath(xpath, parent) {
   }
 
 window.addEventListener('load', function() {
-    const copyTitleFather = getElementsByXpath('//*[@id="id_title"]');
 
-    const inlinesElements = getElementsByXpath('//input[contains(@id,"title") and contains(@class,"my-title-input")]')
+    // document.getElementById('onclick').addEventListener('click', function() {
+    //     const copyTitleFather = getElementsByXpath('//*[@id="id_title"]');
 
-    // copiar copyTitleFather para todos los inlines menos el ultimo
-    for (let i = 0; i < inlinesElements.length - 1; i++) {
-        // verificar si el inline tiene valor en el titulo para no sobreescribirlo
-        if (inlinesElements[i].value == '')
+    //     const inlinesElements = getElementsByXpath('//input[contains(@id,"title") and contains(@class,"my-title-input")]')
 
-            inlinesElements[i].value = copyTitleFather[0].value;
-    }
+    //     // copiar copyTitleFather para todos los inlines menos el ultimo
+    //     for (let i = 0; i < inlinesElements.length - 1; i++) {
+    //         // verificar si el inline tiene valor en el titulo para no sobreescribirlo
+    //         if (inlinesElements[i].value == '')
+
+    //             inlinesElements[i].value = copyTitleFather[0].value;
+    //     }
+    // });
+    
 });

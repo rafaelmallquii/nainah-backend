@@ -140,3 +140,33 @@ input[type=checkbox]:checked {
   border-color: #e83e8c !important;
   color: white !important;
 }
+
+/* image */
+img {
+  border-radius: 13px !important;
+  margin: 4px !important;
+  box-shadow: #e08db4a6 2px 2px 10px 0px !important;
+  padding: .125rem !important;
+}
+
+img:hover {
+  box-shadow: #e08db4a6 2px 2px 10px 0px !important;
+  padding: .125rem !important;
+  transform: scale(1.1);
+  
+}
+
+/* container */
+
+.content {
+  padding: 4px !important;
+}
+
+.container-fluid {
+  padding: 4px !important;
+}
+
+.card {
+  overflow: hidden !important;
+}
+

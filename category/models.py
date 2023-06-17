@@ -1,6 +1,5 @@
 from django.db import models
 from core.settings import LANGUAGE_CODE
-
 # Create your models here.
 
 class Category(models.Model):

@@ -16,7 +16,7 @@ class MetaAttributeInline(admin.TabularInline):
 class ProductVariantInline(admin.StackedInline):
     form = InlineProductForm
     model = ProductVariant
-    extra = 1
+    extra = 0
 
     readonly_fields = ['current_image',]
 

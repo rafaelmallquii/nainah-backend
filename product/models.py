@@ -2,11 +2,17 @@ from django.db import models
 from .utils import validator_price
 from ckeditor.fields import RichTextField
 from category.models import Category
-
-from .choices import SIZE_CHOICES, COLOR_CHOICES
-
 from django.utils.safestring import mark_safe
-# Create your models here.
+
+from .choices import (
+    SIZE_CHOICES,
+    COLOR_CHOICES
+)
+
+from .seeds import (
+    DEFAULT_DESCRIPTION,
+    DEFAULT_TITLE
+)
 
 
 class Tag(models.Model):
@@ -22,11 +28,11 @@ class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.PROTECT)
     tags = models.ManyToManyField(Tag)
     
-    title = models.CharField(max_length=100, default='Product Title')
-    description = RichTextField(default='Product Description')
+    title = models.CharField(max_length=100, default=DEFAULT_TITLE)
+    description = RichTextField(default=DEFAULT_DESCRIPTION)
 
     color = models.CharField(max_length=100, choices=COLOR_CHOICES, blank=True, null=True)
-    # array field
+
     size = models.CharField(max_length=100, choices=SIZE_CHOICES, blank=True, null=True)
     
     price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00, validators=[validator_price])
@@ -41,12 +47,12 @@ class Product(models.Model):
     
     def preview_image(self):
         if self.image:
-            return mark_safe(f'<img src="{self.image.url}" width ="200"/>')
+            return mark_safe(f'<img src="{self.image.url}" width ="200px"/>')
         else:
             return 'No Image'
         
     def current_image(self):
-        return mark_safe(f'<img src="{self.image.url}" width="300" id="image-preview" />')
+        return mark_safe(f'<img src="{self.image.url}" width="200px" id="image-preview" />')
 
 
 class ProductVariant(models.Model):
