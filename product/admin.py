@@ -8,7 +8,7 @@ from .forms import ProductForm, InlineProductForm
 admin.site.register(Tag)
 
 
-class MetaAttributeInline(admin.TabularInline):
+class MetaAttributeInline(admin.StackedInline):
     model = MetaAttribute
     extra = 1
 
@@ -30,6 +30,10 @@ class ProductAdmin(admin.ModelAdmin):
 
     form = ProductForm
 
+    # table editable
+    
+    list_editable = ['price', 'enabled', 'category', ]
+    
     actions_on_bottom = True
     actions_on_top = False
 
@@ -51,13 +55,13 @@ class ProductAdmin(admin.ModelAdmin):
 
     def unmake_trending(self, request, queryset):
         queryset.update(trending=False)
-
+        
     make_trending.short_description = "Mark selected products as trending"
     unmake_trending.short_description = "Unmark all products as trending"
 
     readonly_fields = ['current_image',]
 
-    list_display = ['title', 'price', 'category', 'enabled', 'preview_image']
+    list_display = ['title', 'price', 'preview_image', 'enabled', 'category', ]
     search_fields = ['title',]
     list_filter = ['category', 'enabled', 'trending']
 
@@ -76,3 +80,4 @@ class ProductAdmin(admin.ModelAdmin):
             'all': ('css/widgets/checkbox.css',)
         }
         js = ('js/widgets/checkbox.js', 'js/widgets/copyvalues.js')
+

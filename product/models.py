@@ -11,7 +11,9 @@ from .choices import (
 
 from .seeds import (
     DEFAULT_DESCRIPTION,
-    DEFAULT_TITLE
+    DEFAULT_TITLE,
+    DEFAULT_PRICE,
+    DEFAULT_CATEGORY,
 )
 
 
@@ -25,8 +27,8 @@ class Tag(models.Model):
 class Product(models.Model):
     enabled = models.BooleanField(default=False, help_text='Is this product Enabled?')
     trending = models.BooleanField(default=False, help_text='Is this product in Trending?')
-    category = models.ForeignKey(Category, on_delete=models.PROTECT)
-    tags = models.ManyToManyField(Tag)
+    category = models.ForeignKey(Category, on_delete=models.PROTECT, default=DEFAULT_CATEGORY)
+    tags = models.ManyToManyField(Tag, blank=True)
     
     title = models.CharField(max_length=100, default=DEFAULT_TITLE)
     description = RichTextField(default=DEFAULT_DESCRIPTION)
@@ -35,7 +37,7 @@ class Product(models.Model):
 
     size = models.CharField(max_length=100, choices=SIZE_CHOICES, blank=True, null=True)
     
-    price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00, validators=[validator_price])
+    price = models.DecimalField(max_digits=10, decimal_places=2, default=DEFAULT_PRICE, validators=[validator_price])
     stock = models.PositiveBigIntegerField(default=0)
 
     image = models.ImageField(upload_to='images/products')
@@ -47,7 +49,7 @@ class Product(models.Model):
     
     def preview_image(self):
         if self.image:
-            return mark_safe(f'<img src="{self.image.url}" width ="200px"/>')
+            return mark_safe(f'<img src="{self.image.url}" width ="100px"/>')
         else:
             return 'No Image'
         
@@ -84,7 +86,7 @@ class ProductImage(models.Model):
         return self.product.title
     
     def current_image(self):
-        return mark_safe(f'<img src="{self.image.url}" width="200" id="image-preview" />')
+        return mark_safe(f'<img src="{self.image.url}" width="200" id="" />')
 
 class MetaAttribute(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
