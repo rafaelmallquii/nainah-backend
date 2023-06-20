@@ -79,8 +79,6 @@ class OrderItem(models.Model):
     
     price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     tax = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
-    shipping_charge = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
-    
     total_price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True,)
     
     quantity = models.PositiveIntegerField(default=1, validators=[MinValueValidator(1)])
