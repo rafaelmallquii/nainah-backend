@@ -19,3 +19,4 @@ class InlineProductForm(forms.ModelForm):
         widgets = {
             'title': forms.TextInput(attrs={'class': 'my-title-input'}),
         }
+        

@@ -20,6 +20,31 @@ class Setting(models.Model):
     def __str__(self):
         return self.site_name
 
+class Tax(models.Model):
+    setting = models.OneToOneField(Setting, on_delete=models.CASCADE)
+    tax_percentage = models.DecimalField(
+        max_digits=10,
+        decimal_places=4,
+        help_text='Enter tax percentage in decimal format. Example: 0.05 for 5% tax.',
+        blank=True,
+        null=True
+    )
+
+    def __str__(self):
+        return f'{self.tax_percentage}'
+
+    class Meta:
+        verbose_name_plural = 'Tax'
+        
+class ShippingCharge(models.Model):
+    setting = models.OneToOneField(Setting, on_delete=models.CASCADE)
+    shipping_charge = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+
+    def __str__(self):
+        return self.shipping_charge
+
+    class Meta:
+        verbose_name_plural = 'Shipping'
 
 class SiteMeta(models.Model):
     setting = models.OneToOneField(Setting, on_delete=models.CASCADE)
