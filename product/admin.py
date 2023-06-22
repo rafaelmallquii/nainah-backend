@@ -6,8 +6,7 @@ from .forms import ProductForm, InlineProductForm
 
 
 admin.site.register(Tag)
-
-
+    
 class MetaAttributeInline(admin.StackedInline):
     model = MetaAttribute
     extra = 1

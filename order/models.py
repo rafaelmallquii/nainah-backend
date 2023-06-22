@@ -7,6 +7,8 @@ from django.dispatch import receiver
 
 from customer.models import Customer
 
+from setting.models import Tax
+
 
 class Order(models.Model):
 
@@ -50,14 +52,19 @@ class Order(models.Model):
 
     status = models.CharField(max_length=2, choices=ORDER_STATUS_CHOICES, default=PENDING)
     products = models.ManyToManyField(ProductVariant, through='OrderItem')
-    total = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     sub_total = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
-
+    tax = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    shipping_charge = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    total = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    
+        
+    
     class Meta:
         ordering = ('-created',)
 
     def __str__(self):
         return f'Order {self.id}'
+    
 
 
 class OrderItem(models.Model):
@@ -78,6 +85,19 @@ class OrderItem(models.Model):
 
     def __str__(self):
         return str(self.id)
+    
+    def save(self, *args, **kwargs):
+        self.variant_id = self.product.id
+        self.title = self.product.title
+        self.price = self.product.price
+        self.image = self.product.image
+        
+        self.total_price = self.price * self.quantity
+        
+        self.tax = self.total_price * Tax.objects.first().tax_percentage
+        
+
+        super().save(*args, **kwargs)
 
 
 # @receiver([post_save, post_delete], sender=OrderItem)
@@ -87,10 +107,11 @@ class OrderItem(models.Model):
 #         total=models.Sum('total_price'))['total'] or 0.00
 #     order.save()
 
-
-# # Al final del archivo
 # post_save.connect(update_order_total, sender=OrderItem)
 # post_delete.connect(update_order_total, sender=OrderItem)
+
+
+# # Al final del archivo
 
 # def save(self, *args, **kwargs):
 #     if not self.price:
@@ -99,11 +120,11 @@ class OrderItem(models.Model):
 #     if not self.title:
 #         self.title = self.product.title
 
-#     if not self.image:
-#         self.image = self.product.image
+    # if not self.image:
+    #     self.image = self.product.image
 
-#     self.total_price = self.price * self.quantity
+    # self.total_price = self.price * self.quantity
 
-#     self.order.total = self.order.total + self.total_price
+    # self.order.total = self.order.total + self.total_price
 
-#     super().save(*args, **kwargs)
+    # super().save(*args, **kwargs)

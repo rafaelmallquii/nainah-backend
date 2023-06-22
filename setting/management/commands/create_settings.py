@@ -1,7 +1,7 @@
 from customer.models import Customer
 from django.core.files import File
 from django.core.management.base import BaseCommand
-from setting.models import Setting, SiteMeta
+from setting.models import Setting, SiteMeta, Tax, ShippingCharge
 
 
 class Command(BaseCommand):
@@ -48,5 +48,19 @@ class Command(BaseCommand):
         site_meta.meta_image = 'images/site/site_logo.jpg'
         site_meta.save()
 
-
+        # # tax initial
+        tax = Tax()
+        tax.setting = setting
+        tax.tax_percentage = 0.0625
+        tax.save()
+        
+        # # shipping charge initial
+        shipping_charge = ShippingCharge()
+        shipping_charge.setting = setting
+        shipping_charge.shipping_charge = 5.00
+        shipping_charge.save()
+        
         self.stdout.write(self.style.SUCCESS('Initial settings created successfully.'))
+        
+# exectute the command in the terminal
+# python manage.py create_settings

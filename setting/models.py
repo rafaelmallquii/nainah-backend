@@ -41,7 +41,7 @@ class ShippingCharge(models.Model):
     shipping_charge = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
 
     def __str__(self):
-        return self.shipping_charge
+        return f'{self.shipping_charge}'
 
     class Meta:
         verbose_name_plural = 'Shipping'
@@ -56,7 +56,7 @@ class SiteMeta(models.Model):
     meta_image = models.ImageField(upload_to='images/site/')
 
     def __str__(self):
-        return self.meta_title
+        return f'{self.meta_title}'
 
     class Meta:
         verbose_name_plural = 'Site Meta'
