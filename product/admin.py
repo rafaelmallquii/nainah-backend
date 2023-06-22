@@ -12,28 +12,25 @@ class MetaAttributeInline(admin.StackedInline):
     model = MetaAttribute
     extra = 1
 
+
 class ProductImageInline(admin.StackedInline):
     model = ProductImage
     extra = 1
     readonly_fields = ['current_image',]
 
+
 class ProductVariantInline(admin.StackedInline):
     form = InlineProductForm
     model = ProductVariant
-    extra = 0
+    extra = 1
 
     readonly_fields = ['current_image',]
 
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-
     form = ProductForm
-
-    # table editable
-    
-    list_editable = ['price', 'enabled', 'category', ]
-    
+    # list_editable = ['price', 'enabled', ]
     actions_on_bottom = True
     actions_on_top = False
 
@@ -55,7 +52,7 @@ class ProductAdmin(admin.ModelAdmin):
 
     def unmake_trending(self, request, queryset):
         queryset.update(trending=False)
-        
+
     make_trending.short_description = "Mark selected products as trending"
     unmake_trending.short_description = "Unmark all products as trending"
 
@@ -80,4 +77,3 @@ class ProductAdmin(admin.ModelAdmin):
             'all': ('css/widgets/checkbox.css',)
         }
         js = ('js/widgets/checkbox.js', 'js/widgets/copyvalues.js')
-

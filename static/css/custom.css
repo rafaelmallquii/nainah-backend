@@ -189,7 +189,15 @@ img:hover {
 
 
 /* product variants */
-
 .tab-content {
   padding: 0 !important;
+}
+
+/* input number */
+input[type="number"] {
+  width: 80px;
+  height: 30px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 5px;
 }

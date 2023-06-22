@@ -9,7 +9,7 @@ class ProductForm(forms.ModelForm):
         widgets = {
             'enabled': forms.CheckboxInput(attrs={'class': 'my-checkbox-enabled'}),
             'trending': forms.CheckboxInput(attrs={'class': 'my-checkbox'}),
-            
+            'price': forms.NumberInput(attrs={'step': '1'}),
         }
 
 class InlineProductForm(forms.ModelForm):

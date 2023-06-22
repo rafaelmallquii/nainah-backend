@@ -1,13 +1,7 @@
 from django.contrib import admin
-
 from django.utils.safestring import mark_safe
-
 from .models import Order, OrderItem
-
 from .forms import InlineOrderItemForm
-
-# Register your models here.
-
 
 class OrderItemInline(admin.TabularInline):
     form = InlineOrderItemForm
@@ -20,15 +14,6 @@ class OrderItemInline(admin.TabularInline):
     def image_product(self, obj):
         return mark_safe(f'<img src="{obj.image.url}" width ="100px"/>')
 
-    def formfield_for_foreignkey(self, db_field, request, **kwargs):
-        # no need to show all products in the dropdown
-        
-        if db_field.name == 'product':
-            kwargs['queryset'] = db_field.related_model.objects.filter(enabled=True)
-            
-        
-        return super().formfield_for_foreignkey(db_field, request, **kwargs)
-
         
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
@@ -39,7 +24,7 @@ class OrderAdmin(admin.ModelAdmin):
     
     date_hierarchy = 'created'
 
-    list_display = ['name', 'email', 'address', 'city', 'postal_code', 'created', 'updated', 'paid', 'status']
+    list_display = ['id', 'name', 'email', 'address', 'city', 'postal_code', 'created', 'updated', 'paid', 'status']
     search_fields = ['paid', 'status']
     list_filter = ['paid', 'status']
     list_per_page = 10
