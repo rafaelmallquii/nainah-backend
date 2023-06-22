@@ -1,24 +1,19 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import Customer, OrderHistory, Whishlist
-
+from django.db.models.query import QuerySet
+from django.http.request import HttpRequest
+from .models import Customer, Whishlist
 from .forms import CustomerCreationForm, CustomerForm
+from order.models import Order
 
-# Register your models here.
-
-class ReadOnlyTabularInline(admin.TabularInline):
-    def has_add_permission(self, request, obj=None):
-        return False
-
-    def get_formset(self, request, obj=None, **kwargs):
-        formset = super().get_formset(request, obj, **kwargs)
-        formset.can_delete = False  # Opcionalmente, puedes deshabilitar también la eliminación
-        return formset
-
-class OrderHistoryInline(admin.StackedInline): # ReadOnlyTabularInline
-    model = OrderHistory
+class OrderHistoryInline(admin.TabularInline): # ReadOnlyTabularInline
+    model = Order
     extra = 0
+    # mostrar solo 3 campos
+    # fields = ('status', 'total')
 
+    # readonly_fields = ('__all__',)
+    
 class WhishlistInline(admin.TabularInline):
     model = Whishlist
     extra = 0
@@ -34,7 +29,7 @@ class CustomerAdmin(UserAdmin):
         WhishlistInline,
     ]
 
-    readonly_fields = ('date_joined', 'last_login', 'orderhistory',)
+    readonly_fields = ('date_joined', 'last_login',)
 
     fieldsets = (
         # (None, {"fields": ("username", "password")}),

@@ -5,6 +5,8 @@ from django.core.validators import MinValueValidator
 from django.db.models.signals import pre_save, post_save, post_delete
 from django.dispatch import receiver
 
+from customer.models import Customer
+
 
 class Order(models.Model):
 
@@ -24,6 +26,8 @@ class Order(models.Model):
         (CANCELED, 'Canceled'),
     )
 
+    customer = models.ForeignKey(Customer, on_delete=models.PROTECT, null=True, blank=True)
+    
     name = models.CharField(max_length=100)
     email = models.EmailField()
     address = models.TextField()
@@ -60,6 +64,7 @@ class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True,)
     product = models.ForeignKey(ProductVariant, on_delete=models.SET_NULL, null=True, blank=True)
     
+    variant_id = models.CharField(max_length=100, null=True, blank=True)
     # create a custom field to store the price at the moment of the purchase
     title = models.CharField(max_length=200, null=True, blank=True)
 
@@ -71,8 +76,8 @@ class OrderItem(models.Model):
 
     quantity = models.PositiveIntegerField(default=1, validators=[MinValueValidator(1)])
 
-    # def __str__(self):
-    #     return f'{self.quantity} of {self.product.title}'
+    def __str__(self):
+        return str(self.id)
 
 
 # @receiver([post_save, post_delete], sender=OrderItem)

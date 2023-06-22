@@ -8,7 +8,7 @@ class OrderItemInline(admin.TabularInline):
     model = OrderItem
     exclude = ['image']
     # raw_id_fields = ['product']
-    readonly_fields = ['title', 'image_product', 'price', 'total_price', 'tax',]
+    readonly_fields = ['title', 'variant_id', 'image_product', 'price', 'total_price', 'tax',]
     extra = 1
 
     def image_product(self, obj):

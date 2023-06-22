@@ -28,17 +28,6 @@ class Customer(AbstractUser):
     class Meta:
         verbose_name_plural = 'Customers'
         verbose_name = 'Customer'
-
-class OrderHistory(models.Model):
-
-    customer = models.ForeignKey('Customer', on_delete=models.CASCADE)
-    product = models.ForeignKey('product.Product', on_delete=models.CASCADE)
-    order = models.ForeignKey('order.Order', on_delete=models.CASCADE)
-    # order_item = models.ForeignKey('order.OrderItem', on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.customer.email
-    
     
 class Whishlist(models.Model):
     customer = models.ForeignKey('Customer', on_delete=models.CASCADE)

@@ -22,7 +22,7 @@ class ProductImageInline(admin.StackedInline):
 class ProductVariantInline(admin.StackedInline):
     form = InlineProductForm
     model = ProductVariant
-    extra = 1
+    extra = 0
 
     readonly_fields = ['current_image',]
 
@@ -58,7 +58,7 @@ class ProductAdmin(admin.ModelAdmin):
 
     readonly_fields = ['current_image',]
 
-    list_display = ['title', 'price', 'preview_image', 'enabled', 'category', ]
+    list_display = ['id', 'preview_image', 'title', 'enabled', 'category', ]
     search_fields = ['title',]
     list_filter = ['category', 'enabled', 'trending']
 
