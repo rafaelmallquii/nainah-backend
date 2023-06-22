@@ -14,6 +14,7 @@ class OrderItemInline(admin.TabularInline):
     def image_product(self, obj):
         return mark_safe(f'<img src="{obj.image.url}" width ="100px"/>')
 
+    
         
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
