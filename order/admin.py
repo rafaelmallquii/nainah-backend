@@ -25,13 +25,13 @@ class OrderAdmin(admin.ModelAdmin):
     
     date_hierarchy = 'created'
 
-    list_display = ['id', 'name', 'email', 'address', 'city', 'postal_code', 'created', 'updated', 'paid', 'status']
+    list_display = ['id', 'customer', 'paid', 'status', 'sub_total', 'tax', 'shipping_charge', 'total', 'created', 'updated',]
     search_fields = ['paid', 'status']
     list_filter = ['paid', 'status']
     list_per_page = 10
     
     # exclude = ['total',]
-    readonly_fields = ['total', 'sub_total',]
+    readonly_fields = ['sub_total', 'tax', 'shipping_charge','total',]
     
     # sumarle un USD$ al total
     def sub_total(self, obj):

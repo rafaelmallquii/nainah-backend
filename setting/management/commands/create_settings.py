@@ -33,8 +33,6 @@ class Command(BaseCommand):
             setting.site_favicon.save('logo.png', File(f), save=True)
             setting.site_icon.save('logo.png', File(f), save=True)
 
-        
-
 
         setting.save()
 

@@ -38,10 +38,10 @@ class Tax(models.Model):
         
 class ShippingCharge(models.Model):
     setting = models.OneToOneField(Setting, on_delete=models.CASCADE)
-    shipping_charge = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    amount = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
 
     def __str__(self):
-        return f'{self.shipping_charge}'
+        return f'{self.amount}'
 
     class Meta:
         verbose_name_plural = 'Shipping'

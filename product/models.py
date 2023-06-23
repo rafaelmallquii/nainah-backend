@@ -26,7 +26,7 @@ class Product(models.Model):
     enabled = models.BooleanField(default=False, help_text='Is this product Enabled?')
     trending = models.BooleanField(default=False, help_text='Is this product in Trending?')
     category = models.ForeignKey(Category, on_delete=models.PROTECT, default=DEFAULT_CATEGORY)
-    tags = models.ManyToManyField(Tag, blank=True)
+    tags = models.ManyToManyField(Tag, blank=True, help_text='Select tags for this product')
     
     title = models.CharField(max_length=100, default=DEFAULT_TITLE)
     description = RichTextField(default=DEFAULT_DESCRIPTION)
@@ -54,7 +54,7 @@ class ProductVariant(models.Model):
     title = models.CharField(max_length=100)
     color = models.CharField(max_length=100,choices=COLOR_CHOICES, blank=True, null=True)
     size = models.CharField(max_length=100, choices=SIZE_CHOICES, blank=True, null=True)
-    stock = models.PositiveBigIntegerField(default=0, help_text='Stock of this variant')
+    stock = models.PositiveBigIntegerField(default=1, help_text='Stock of this variant')
     price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00, validators=[validator_price])
     image = models.ImageField(upload_to='images/products')
 
