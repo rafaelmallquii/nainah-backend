@@ -2,7 +2,7 @@ from customer.models import Customer
 from django.core.files import File
 from django.core.management.base import BaseCommand
 from setting.models import Setting, SiteMeta, Tax, ShippingCharge
-
+import os
 
 class Command(BaseCommand):
     help = 'Create initial settings for the ecommerce project'
@@ -26,13 +26,15 @@ class Command(BaseCommand):
         setting.site_instagram = 'https://www.instagram.com/nainahcollectioncompany/'
         setting.site_tiktok = 'https://www.tiktok.com/@nainahcollection22'
 
-        # # load images
-        # with open('path/to/site_icon.jpg', 'rb') as f:
-        #     setting.site_icon.save('site_icon.jpg', File(f))
-        # with open('path/to/site_logo.jpg', 'rb') as f:
-        #     setting.site_logo.save('site_logo.jpg', File(f))
-        # with open('path/to/site_favicon.jpg', 'rb') as f:
-        #     setting.site_favicon.save('site_favicon.jpg', File(f))
+        img_path = os.path.join(os.getcwd(), 'setting/management/commands/logo.png')
+        
+        with open(img_path, 'rb') as f:
+            setting.site_logo.save('logo.png', File(f), save=True)
+            setting.site_favicon.save('logo.png', File(f), save=True)
+            setting.site_icon.save('logo.png', File(f), save=True)
+
+        
+
 
         setting.save()
 
