@@ -3,6 +3,8 @@ from django.utils.safestring import mark_safe
 from .models import Order, OrderItem
 from .forms import InlineOrderItemForm
 
+from .utils import generate_pdf
+
 class OrderItemInline(admin.TabularInline):
     form = InlineOrderItemForm
     model = OrderItem
@@ -45,3 +47,12 @@ class OrderAdmin(admin.ModelAdmin):
         }
         
         js = ('js/order/order.js',)
+        
+    actions = ['export_as_pdf']
+
+    def export_as_pdf(self, request, queryset):
+        for order in queryset:
+            pdf_response = generate_pdf(order)
+            return pdf_response
+
+    export_as_pdf.short_description = "Export selected orders as PDF"
