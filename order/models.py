@@ -27,6 +27,7 @@ class Order(models.Model):
     )
 
     customer = models.ForeignKey(Customer, on_delete=models.PROTECT, null=True, blank=True)
+    is_for_same_customer = models.BooleanField(default=False)
     name = models.CharField(max_length=100)
     email = models.EmailField(blank=True, null=True)
     phone = models.CharField(max_length=100)
