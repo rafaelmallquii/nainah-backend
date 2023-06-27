@@ -7,9 +7,9 @@ from .models import Category
 # Register your models here.
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ['name', 'description', 'current_image']
-    search_fields = ['name', 'description']
-    list_filter = ['name', 'description']
+    list_display = ['name', 'current_image']
+    search_fields = ['name',]
+    list_filter = ['name', ]
     list_per_page = 10
 
     readonly_fields = ['current_image',]

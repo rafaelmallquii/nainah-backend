@@ -56,6 +56,7 @@ class ProductVariant(models.Model):
     size = models.CharField(max_length=100, choices=SIZE_CHOICES, blank=True, null=True)
     stock = models.PositiveBigIntegerField(default=1, help_text='Stock of this variant')
     price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00, validators=[validator_price])
+    sale_price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     image = models.ImageField(upload_to='images/products')
 
     def current_image(self):

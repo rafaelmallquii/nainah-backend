@@ -10,6 +10,8 @@ __pycache__
 # Backup files # 
 *.bak 
 
+merchant.py
+
 # If you are using PyCharm # 
 # User-specific stuff
 .idea/**/workspace.xml

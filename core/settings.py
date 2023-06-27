@@ -74,6 +74,7 @@ LOCAL_APPS = [
     'transaction',
     'newsletter',
     'setting',
+    'catalog',
     
 ]
 
@@ -185,36 +186,24 @@ JAZZMIN_SETTINGS = {
     "site_logo": "images/logo.png",
     "site_favicon": "images/logo.png",
     "welcome_sign": "Welcome to NainahCollections",
-
-
     "changeform_format": "horizontal_tabs",
-
-
     "search_model": ["product.Product"],
-
-
     "copyright": "NainahCollections",
-    
     "show_ui_builder": False,
-
     # manytoone and foreignkey lookups & dropdowns
     "related_modal_active": True,
-
     "navigation_expanded": True,
-
     "hide_apps": [],
-
     "custom_css": "css/custom.css", 
     "custom_js": "js/custom.js",
-
     "icons": {
         "auth": "fas fa-users-cog",
         "auth.user": "fas fa-regular fa-user",
         "auth.Group": "fas fa-users",
-
         "chart.Chart": "fas fa-chart-pie",
         "coupon.Coupon": "fas fa-regular fa-tag",
         "customer.Customer": "fas fa-user",
+        "catalog.Catalog": "fas fa-regular fa-book",
         "category.Category": "fas fa-light fa-list",
         "product.Product": "fas fa-regular fa-box",
         "product.Tag": "fas fa-regular fa-hashtag",
@@ -223,14 +212,13 @@ JAZZMIN_SETTINGS = {
         "transaction.Transaction": "fas fa-credit-card",
         "newsletter.Newsletter": "fas fa-rss-square",
         "setting.Setting": "fas fa-cog",
-
     },
-
-    # cambiar el orden de los modelos en el menu 
+    # change order of models in admin sidebar
     "order_with_respect_to": {
         "auth": ["auth.User", "auth.Group"],
         "chart": ["chart.Chart"],
         "customer": ["customer.Customer"],
+        "catalog": ["catalog.Catalog"],
         "category": ["category.Category"],
         "product": ["product.Product"],
         "coupon": ["coupon.Coupon"],
@@ -240,7 +228,6 @@ JAZZMIN_SETTINGS = {
         "newsletter": ["newsletter.Newsletter"],
         "setting": ["setting.Setting"],
     },
-
     # buttons 
 }
 
