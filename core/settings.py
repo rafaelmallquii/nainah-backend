@@ -53,7 +53,6 @@ DJANGO_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
 ]
 
 THIRD_PARTY_APPS = [
@@ -61,6 +60,7 @@ THIRD_PARTY_APPS = [
     'colorfield',
     'rest_framework',
     'drf_spectacular',
+    'django_filters',
     # 'debug_toolbar',
 ]
 
@@ -76,7 +76,6 @@ LOCAL_APPS = [
     'newsletter',
     'setting',
     'catalog',
-    
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -279,12 +278,19 @@ CKEDITOR_CONFIGS = {
     },
 }
 
+# allow iframe embedding
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 # rest framework
 REST_FRAMEWORK = {
     # YOUR SETTINGS
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    # 'DEFAULT_AUTHENTICATION_CLASSES': (
+    #     'rest_framework_simplejwt.authentication.JWTAuthentication',
+    # ),
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+    # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    # 'PAGE_SIZE': 20,
 }
 
 SPECTACULAR_SETTINGS = {

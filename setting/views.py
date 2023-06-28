@@ -16,4 +16,4 @@ class SettingViewSet(viewsets.ModelViewSet):
         exclude=True,  # Ignore the 'GET /{id}'
     )
     def retrieve(self, request, *args, **kwargs):
-        pass
+        return super().retrieve(request, *args, **kwargs)
