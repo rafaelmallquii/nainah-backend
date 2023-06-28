@@ -1,11 +1,9 @@
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from .models import Setting, SiteMeta
-from .serializers import SettingSerializer, SiteMetaSerializer
+from rest_framework import viewsets
+from .models import Setting
+from .serializers import SettingSerializer
 
-class SettingApiView(APIView):
-    def get(self, request):
-        setting = Setting.objects.all()
-        serializer = SettingSerializer(setting, many=True)
-        return Response(serializer.data)
+class SettingViewSet(viewsets.ModelViewSet):
+    queryset = Setting.objects.all()
+    serializer_class = SettingSerializer
     
+    http_method_names = ['get',]

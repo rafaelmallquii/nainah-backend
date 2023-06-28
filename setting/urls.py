@@ -1,6 +1,11 @@
-from django.urls import path
-from .views import SettingApiView
+from django.urls import path, include
+from rest_framework import routers
+from .views import SettingViewSet
+
+router = routers.DefaultRouter()
+
+router.register(r'setting', SettingViewSet, basename='setting')
 
 urlpatterns = [
-    path('setting/', SettingApiView.as_view()),
+    path('', include(router.urls), name='setting'),
 ]
