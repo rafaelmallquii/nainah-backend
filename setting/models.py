@@ -65,8 +65,6 @@ class SiteMeta(models.Model):
     meta_author = models.CharField(max_length=100)
     meta_robots = models.CharField(max_length=100)
     meta_image = models.ImageField(upload_to='images/site/')
-
-    test = models.CharField(max_length=100)
     
     def __str__(self):
         return f'{self.meta_title}'
