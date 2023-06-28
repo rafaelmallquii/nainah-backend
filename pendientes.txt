@@ -1,0 +1,16 @@
+===api / backend===
+agregar descuento en la order (si aplica)
+verificar que la fecha de vencimiento y el monto minimo cumplan y restarle, conversar con cliente si quiere % o $ de descuento
+
+transaccion id (pasarela)
+
+
+===dashboard / backend===
+
+preview de imagen catalogo y settings
+
+refound (pasarela)
+
+calcular descuento en %
+
+calcular impuestos para cada estado
