@@ -20,7 +20,7 @@ class Tag(models.Model):
     name = models.CharField(max_length=100)
 
     def __str__(self):
-        return self.name
+        return f'{self.name}'
 
 class Product(models.Model):
     enabled = models.BooleanField(default=False, help_text='Is this product Enabled?')
