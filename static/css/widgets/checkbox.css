@@ -1,0 +1,73 @@
+.my-checkbox {
+  visibility: hidden;
+  position: absolute;
+}
+
+.my-label {
+  display: inline-block;
+  width: 60px;
+  height: 30px;
+  background-color: #ccc;
+  border-radius: 15px;
+  position: relative;
+  transition: background-color 0.3s;
+  cursor: pointer;
+}
+
+.my-label:before {
+  content: "";
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  left: 2px;
+  top: 2px;
+  background-color: white;
+  transition: left 0.3s;
+}
+
+.my-checkbox:checked + .my-label {
+  background-color: rgb(255, 128, 149);
+}
+
+.my-checkbox:checked + .my-label:before {
+  left: 32px;
+}
+
+/* *** */
+
+.my-checkbox-enabled {
+    visibility: hidden;
+    position: absolute;
+  }
+  
+  .my-label-enabled {
+    display: inline-block;
+    width: 60px;
+    height: 30px;
+    background-color: #ccc;
+    border-radius: 15px;
+    position: relative;
+    transition: background-color 0.3s;
+    cursor: pointer;
+  }
+  
+  .my-label-enabled:before {
+    content: "";
+    position: absolute;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    left: 2px;
+    top: 2px;
+    background-color: white;
+    transition: left 0.3s;
+  }
+  
+  .my-checkbox-enabled:checked + .my-label-enabled {
+    background-color: rgb(255, 128, 149);
+  }
+  
+  .my-checkbox-enabled:checked + .my-label-enabled:before {
+    left: 32px;
+  }
