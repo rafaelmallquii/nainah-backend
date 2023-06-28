@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['*']
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 CSRF_ALLOWED_ORIGINS = [
+    'http://localhost:3000',
     'https://nainah.yotohosting.tk',
 ]
 
