@@ -60,6 +60,7 @@ THIRD_PARTY_APPS = [
     'ckeditor',
     'colorfield',
     'rest_framework',
+    'drf_spectacular',
     # 'debug_toolbar',
 ]
 
@@ -279,3 +280,17 @@ CKEDITOR_CONFIGS = {
 }
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
+
+# rest framework
+REST_FRAMEWORK = {
+    # YOUR SETTINGS
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Nainah Collection API',
+    'DESCRIPTION': 'API For ecommerce website Nainah Collection allowing users to view products, add to cart, checkout, and more.',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    # OTHER SETTINGS
+}

@@ -10,3 +10,7 @@ transaccion id (pasarela)
 preview de imagen catalogo y settings
 
 refound (pasarela)
+
+calcular descuento en %
+
+calcular impuestos para cada estado

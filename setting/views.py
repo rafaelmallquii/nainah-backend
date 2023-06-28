@@ -1,3 +1,11 @@
-from django.shortcuts import render
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from .models import Setting, SiteMeta
+from .serializers import SettingSerializer, SiteMetaSerializer
 
-# Create your views here.
+class SettingApiView(APIView):
+    def get(self, request):
+        setting = Setting.objects.all()
+        serializer = SettingSerializer(setting, many=True)
+        return Response(serializer.data)
+    

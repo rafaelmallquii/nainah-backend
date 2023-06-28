@@ -18,6 +18,8 @@ from django.contrib import admin
 from django.urls import path, include
 from core import settings
 from django.conf.urls.static import static
+from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,6 +28,16 @@ urlpatterns = [
     # path("__debug__/", include("debug_toolbar.urls")),
 
     # api/product/
-    path('api/', include('product.urls')),
+    # path('api/', include('product.urls')),
+    
+    # api/settings/
+    path('', include('setting.urls')),
+    
+    
+    # api schema
+    path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
+    # Optional UI:
+    path('docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
+    path('redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
