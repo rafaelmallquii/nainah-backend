@@ -29,6 +29,8 @@ class Command(BaseCommand):
         img_path = os.path.join(os.getcwd(), 'setting/management/commands/logo.png')
         
         with open(img_path, 'rb') as f:
+            setting.site_banner_small.save('logo.png', File(f), save=True)
+            setting.site_banner_large.save('logo.png', File(f), save=True)
             setting.site_logo.save('logo.png', File(f), save=True)
             setting.site_favicon.save('logo.png', File(f), save=True)
             setting.site_icon.save('logo.png', File(f), save=True)
