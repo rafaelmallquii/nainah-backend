@@ -10,13 +10,5 @@ services:
     volumes:
       - ./media:/code/media
       - ./static:/code/static
-    depends_on:
-      - db-nainah
+      - .db.sqlite3:/code/db.sqlite3
     command: python manage.py runserver 0.0.0.0:8001
-  db-nainah:
-    image: postgres
-    environment:
-      POSTGRES_USER: myuser
-      POSTGRES_PASSWORD: mypassword
-      POSTGRES_DB: mydb
-      
