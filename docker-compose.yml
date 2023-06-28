@@ -9,4 +9,12 @@ services:
       - "8001:8001"
     volumes:
       - .:/code
+    depends_on:
+      - db-nainah
     command: python manage.py runserver 0.0.0.0:8001
+  db-nainah:
+    image: postgres
+    environment:
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_DB: mydb
