@@ -1,4 +1,6 @@
 from django.db import models
+# import valationError
+from django.core.exceptions import ValidationError
 
 # Create your models here.
 
@@ -19,6 +21,13 @@ class Setting(models.Model):
 
     def __str__(self):
         return self.site_name
+    
+    def save(self, *args, **kwargs):
+        if not self.pk and Setting.objects.exists():
+            pass
+        else:
+            return super(Setting, self).save(*args, **kwargs)
+
 
 class Tax(models.Model):
     setting = models.OneToOneField(Setting, on_delete=models.CASCADE)
@@ -60,3 +69,4 @@ class SiteMeta(models.Model):
 
     class Meta:
         verbose_name_plural = 'Site Meta'
+        
