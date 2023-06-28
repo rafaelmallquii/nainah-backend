@@ -4,7 +4,6 @@ from django.core.exceptions import ValidationError
 
 # Create your models here.
 
-
 class Setting(models.Model):
     site_name = models.CharField(max_length=100)
     site_banner_small = models.ImageField(upload_to='images/site/')

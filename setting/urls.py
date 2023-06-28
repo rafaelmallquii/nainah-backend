@@ -6,6 +6,4 @@ router = routers.DefaultRouter()
 
 router.register(r'setting', SettingViewSet, basename='setting')
 
-urlpatterns = [
-    path('', include(router.urls), name='setting'),
-]
+urlpatterns = router.urls
