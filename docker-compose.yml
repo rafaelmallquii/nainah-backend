@@ -7,8 +7,4 @@ services:
     restart: unless-stopped
     ports:
       - "8001:8001"
-    volumes:
-      - ./media:/code/media
-      - ./static:/code/static
-      - .db.sqlite3:/code/db.sqlite3
     command: python manage.py runserver 0.0.0.0:8001
