@@ -6,7 +6,7 @@ from django.db.models.signals import pre_save, post_save, post_delete
 from django.dispatch import receiver
 from customer.models import Customer
 from setting.models import Tax, ShippingCharge
-
+import uuid
 
 class Order(models.Model):
 
@@ -25,7 +25,7 @@ class Order(models.Model):
         (REFOUNDED, 'Refounded'),
         (CANCELED, 'Canceled'),
     )
-
+    
     customer = models.ForeignKey(Customer, on_delete=models.PROTECT, null=True, blank=True)
     is_for_same_customer = models.BooleanField(default=False)
     name = models.CharField(max_length=100)
@@ -71,6 +71,13 @@ class Order(models.Model):
             self.shipping_charge = 0
             
         super().save(*args, **kwargs)
+    
+    def order_id(self):
+        # Format order id to 4 digits
+        return f"#{str(self.pk).zfill(4)}"
+    
+    order_id.short_description = 'ID'
+    order_id.admin_order_field = 'pk'
     
     class Meta:
         ordering = ('-created',)

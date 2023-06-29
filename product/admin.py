@@ -57,7 +57,7 @@ class ProductAdmin(admin.ModelAdmin):
 
     readonly_fields = ['current_image',]
 
-    list_display = ['id', 'preview_image', 'title', 'enabled', 'category', ]
+    list_display = ['product_id', 'preview_image', 'title', 'enabled', 'category', ]
     search_fields = ['title',]
     list_filter = ['category', 'enabled', 'trending']
 

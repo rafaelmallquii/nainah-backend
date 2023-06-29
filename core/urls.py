@@ -21,11 +21,13 @@ from django.conf.urls.static import static
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
 from core import routing
 
+from order.views import OrderView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(routing.router.urls)),
 
+    # path('order/', OrderView.as_view(), name='order'),
     
     # debug toolbar
     # path("__debug__/", include("debug_toolbar.urls")),

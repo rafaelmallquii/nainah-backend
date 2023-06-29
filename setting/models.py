@@ -30,6 +30,17 @@ class Setting(models.Model):
         else:
             return super(Setting, self).save(*args, **kwargs)
 
+class Currency(models.Model):
+    setting = models.OneToOneField(Setting, on_delete=models.CASCADE)
+    currency_code = models.CharField(max_length=3, help_text='Enter currency code. Example: USD, EUR, GBP, etc.', blank=True, null=True)
+    currency_symbol = models.CharField(max_length=5, help_text='Enter currency symbol. Example: $, €, £, etc.')
+
+    def __str__(self):
+        return f'{self.currency_code} {self.currency_symbol}'
+    
+    class Meta:
+        verbose_name_plural = 'Currency'
+        
 
 class Tax(models.Model):
     setting = models.OneToOneField(Setting, on_delete=models.CASCADE)

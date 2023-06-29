@@ -185,15 +185,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Jazzmin settings
 JAZZMIN_SETTINGS = {
-    "site_title": "NainahCollections",
-    "site_header": "NainahCollections",
-    "site_brand": "NainahCollections",
+    "site_title": "Nainah Collection",
+    "site_header": "Nainah Collection",
+    "site_brand": "Nainah Collection",
     "site_logo": "images/logo.png",
     "site_favicon": "images/logo.png",
-    "welcome_sign": "Welcome to NainahCollections",
+    "welcome_sign": "Welcome to Nainah Collection",
     "changeform_format": "horizontal_tabs",
     "search_model": ["product.Product"],
-    "copyright": "NainahCollections",
+    "copyright": "Nainah Collection",
     "show_ui_builder": False,
     # manytoone and foreignkey lookups & dropdowns
     "related_modal_active": True,

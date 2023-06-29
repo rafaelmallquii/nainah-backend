@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Setting, Tax, ShippingCharge, SiteMeta
+from .models import Setting, Currency, Tax, ShippingCharge, SiteMeta
 
 class InlineSiteMeta(admin.StackedInline):
     model = SiteMeta
@@ -13,9 +13,14 @@ class InlineShippingCharge(admin.StackedInline):
     model = ShippingCharge
     extra = 1
 
+class InlineCurrency(admin.StackedInline):
+    model = Currency
+    extra = 1
+
 @admin.register(Setting)
 class SettingAdmin(admin.ModelAdmin):
     inlines = [
+        InlineCurrency,
         InlineTax,
         InlineShippingCharge,
         InlineSiteMeta,

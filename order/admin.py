@@ -2,8 +2,9 @@ from django.contrib import admin
 from django.utils.safestring import mark_safe
 from .models import Order, OrderItem
 from .forms import InlineOrderItemForm
-
 from .utils import generate_pdf
+from setting.models import Currency
+
 
 class OrderItemInline(admin.TabularInline):
     form = InlineOrderItemForm
@@ -27,7 +28,7 @@ class OrderAdmin(admin.ModelAdmin):
     
     date_hierarchy = 'created'
 
-    list_display = ['id', 'customer', 'paid', 'status', 'sub_total', 'tax', 'shipping_charge', 'total', 'created', 'updated',]
+    list_display = ['order_id', 'customer', 'paid', 'status', '_sub_total', 'tax', 'shipping_charge', 'total', 'created', 'updated',]
     search_fields = ['paid', 'status']
     list_filter = ['paid', 'status']
     list_per_page = 10
@@ -36,10 +37,12 @@ class OrderAdmin(admin.ModelAdmin):
     readonly_fields = ['sub_total', 'tax', 'shipping_charge','total',]
     
     # sumarle un USD$ al total
-    def sub_total(self, obj):
+    def _sub_total(self, obj):
+        currency = Currency.objects.first()
+
         if obj.total is not None:
-            return mark_safe(f'<b>USD$ {obj.sub_total}</b>')
-        return mark_safe(f'<b>USD$ 0.00</b>')
+            return mark_safe(f'<b> {currency.currency_symbol} {obj.sub_total}</b>')
+        return mark_safe(f'<b>{currency.currency_symbol} 0.00</b>')
     
     class Media:
         css = {

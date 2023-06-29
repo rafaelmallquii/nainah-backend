@@ -6,7 +6,9 @@ from .models import Coupon
 
 @admin.register(Coupon)
 class CouponAdmin(admin.ModelAdmin):
-    list_display = ('code', 'valid_to', 'discount', 'active')
+    list_display = ('code', 'valid_to', '_discount', 'active')
     list_filter = ('active', 'valid_to')
     search_fields = ('code',)
     
+    def _discount(self, obj):
+        return "{}%".format(obj.discount)

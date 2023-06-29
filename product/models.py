@@ -48,7 +48,13 @@ class Product(models.Model):
     def current_image(self):
         return mark_safe(f'<img src="{self.image.url}" width="200px" id="image-preview" />')
 
-
+    def product_id(self):
+        # Format order id to 4 digits
+        return f'#{str(self.pk).zfill(4)}'
+    
+    product_id.short_description = 'ID'
+    product_id.admin_order_field = 'pk'
+    
 class ProductVariant(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
