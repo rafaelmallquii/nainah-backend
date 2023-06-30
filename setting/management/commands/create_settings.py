@@ -1,63 +1,63 @@
 from customer.models import Customer
 from django.core.files import File
 from django.core.management.base import BaseCommand
-from setting.models import Setting, SiteMeta, Tax, ShippingCharge, Currency
+from setting.models import Setting, SiteMeta, TaxAndShipment, Currency
 import os
 
 
 CITY_TAXES = (
-    ('Alabama', '4.00'),
-    ('Alaska', '0.00'),
-    ('Arizona', '5.60'),
-    ('Arkansas', '6.50'),
-    ('California (b)', '7.25'),
-    ('Colorado', '2.90'),
-    ('Connecticut', '6.35'),
-    ('Delaware', '0.00'),
-    ('D.C.', '6.00'),
-    ('Florida', '6.00'),
-    ('Georgia', '4.00'),
-    ('Hawaii (c)', '4.00'),
-    ('Idaho', '6.00'),
-    ('Illinois', '6.25'),
-    ('Indiana', '7.00'),
-    ('Iowa', '6.00'),
-    ('Kansas', '6.50'),
-    ('Kentucky', '6.00'),
-    ('Louisiana', '4.45'),
-    ('Maine', '5.50'),
-    ('Maryland', '6.00'),
-    ('Massachusetts', '6.25'),
-    ('Michigan', '6.00'),
-    ('Minnesota', '6.875'),
-    ('Mississippi', '7.00'),
-    ('Missouri', '4.225'),
-    ('Montana (d)', '0.00'),
-    ('Nebraska', '5.50'),
-    ('Nevada', '6.85'),
-    ('New Hampshire', '0.00'),
-    ('New Jersey (e)', '6.625'),
-    ('New Mexico (c)', '5.125'),
-    ('New York', '4.00'),
-    ('North Carolina', '4.75'),
-    ('North Dakota', '5.00'),
-    ('Ohio', '5.75'),
-    ('Oklahoma', '4.50'),
-    ('Oregon', '0.00'),
-    ('Pennsylvania', '6.00'),
-    ('Puerto Rico', '10.50'),
-    ('Rhode Island', '7.00'),
-    ('South Carolina', '6.00'),
-    ('South Dakota (c)', '4.50'),
-    ('Tennessee', '7.00'),
-    ('Texas', '6.25'),
-    ('Utah (b)', '6.10'),
-    ('Vermont', '6.00'),
-    ('Virginia (b)', '5.30'),
-    ('Washington', '6.50'),
-    ('West Virginia', '6.00'),
-    ('Wisconsin', '5.00'),
-    ('Wyoming', '4.00'),
+    ('Alabama', '4.00', '0.00'),
+    ('Alaska', '0.00', '0.00'),
+    ('Arizona', '5.60', '0.00'),
+    ('Arkansas', '6.50', '0.00'),
+    ('California (b)', '7.25', '0.00'),
+    ('Colorado', '2.90', '0.00'),
+    ('Connecticut', '6.35', '0.00'),
+    ('Delaware', '0.00', '0.00'),
+    ('D.C.', '6.00', '0.00'),
+    ('Florida', '6.00', '0.00'),
+    ('Georgia', '4.00', '0.00'),
+    ('Hawaii (c)', '4.00', '0.00'),
+    ('Idaho', '6.00', '0.00'),
+    ('Illinois', '6.25', '0.00'),
+    ('Indiana', '7.00', '0.00'),
+    ('Iowa', '6.00', '0.00'),
+    ('Kansas', '6.50', '0.00'),
+    ('Kentucky', '6.00', '0.00'),
+    ('Louisiana', '4.45', '0.00'),
+    ('Maine', '5.50', '0.00'),
+    ('Maryland', '6.00', '0.00'),
+    ('Massachusetts', '6.25', '0.00'),
+    ('Michigan', '6.00', '0.00'),
+    ('Minnesota', '6.875', '0.00'),
+    ('Mississippi', '7.00', '0.00'),
+    ('Missouri', '4.225', '0.00'),
+    ('Montana (d)', '0.00', '0.00'),
+    ('Nebraska', '5.50', '0.00'),
+    ('Nevada', '6.85', '0.00'),
+    ('New Hampshire', '0.00', '0.00'),
+    ('New Jersey (e)', '6.625', '0.00'),
+    ('New Mexico (c)', '5.125', '0.00'),
+    ('New York', '4.00', '0.00'),
+    ('North Carolina', '4.75', '0.00'),
+    ('North Dakota', '5.00', '0.00'),
+    ('Ohio', '5.75', '0.00'),
+    ('Oklahoma', '4.50', '0.00'),
+    ('Oregon', '0.00', '0.00'),
+    ('Pennsylvania', '6.00', '0.00'),
+    ('Puerto Rico', '10.50', '0.00'),
+    ('Rhode Island', '7.00', '0.00'),
+    ('South Carolina', '6.00', '0.00'),
+    ('South Dakota (c)', '4.50', '0.00'),
+    ('Tennessee', '7.00', '0.00'),
+    ('Texas', '6.25', '0.00'),
+    ('Utah (b)', '6.10', '0.00'),
+    ('Vermont', '6.00', '0.00'),
+    ('Virginia (b)', '5.30', '0.00'),
+    ('Washington', '6.50', '0.00'),
+    ('West Virginia', '6.00', '0.00'),
+    ('Wisconsin', '5.00', '0.00'),
+    ('Wyoming', '4.00', '0.00'),
 )
 
 class Command(BaseCommand):
@@ -91,8 +91,6 @@ class Command(BaseCommand):
             setting.site_logo.save('logo.png', File(f), save=True)
             setting.site_favicon.save('logo.png', File(f), save=True)
             setting.site_icon.save('logo.png', File(f), save=True)
-
-
         setting.save()
 
         # # site meta initial
@@ -118,11 +116,13 @@ class Command(BaseCommand):
             # is_active=True
         )
         
-        for city, tax_rate in CITY_TAXES:
-            Tax.objects.create(
+        for city, tax_rate, shipment_amount in CITY_TAXES:
+            TaxAndShipment.objects.create(
                 setting=setting,
                 city=city,
-                tax_rate=tax_rate
+                tax_rate=tax_rate,
+                shipment_amount=shipment_amount,
+                
             )
             
         

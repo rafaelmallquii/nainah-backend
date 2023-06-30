@@ -31,7 +31,7 @@ class Order(models.Model):
     email = models.EmailField(blank=True, null=True)
     phone = models.CharField(max_length=100)
     address = models.TextField()
-    city = models.ForeignKey(TaxAndShipment, on_delete=models.PROTECT, help_text='Select City.')
+    city = models.ForeignKey(TaxAndShipment, on_delete=models.CASCADE, help_text='Select City.')
     postal_code = models.CharField(max_length=100)
     country = models.CharField(max_length=100, default='US')
     paid = models.BooleanField(default=False)

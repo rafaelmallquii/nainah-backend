@@ -51,15 +51,21 @@ class TaxAndShipment(models.Model):
         help_text='Enter tax rate e.g. 5.00 for 5% tax.',
         default=0.00
     )
+    
+    shipment_amount = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        help_text='Enter shipment amount.',
+        default=0.00
+    )
 
     def __str__(self):
         return f'{self.city}'
 
     class Meta:
-        verbose_name_plural = 'Taxes'
+        verbose_name_plural = 'Tax and Shipment'
         
         
-
 class SiteMeta(models.Model):
     setting = models.OneToOneField(Setting, on_delete=models.CASCADE)
     meta_title = models.CharField(max_length=100)
