@@ -63,6 +63,7 @@ THIRD_PARTY_APPS = [
     'drf_spectacular',
     'django_filters',
     'corsheaders',
+    'adminsortable2',
     # 'debug_toolbar',
 ]
 

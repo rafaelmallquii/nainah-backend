@@ -4,6 +4,7 @@ from .models import Order, OrderItem
 from .forms import InlineOrderItemForm
 from .utils import generate_pdf
 from setting.models import Currency
+import easy
 
 
 class OrderItemInline(admin.TabularInline):
@@ -17,7 +18,6 @@ class OrderItemInline(admin.TabularInline):
     def image_product(self, obj):
         return mark_safe(f'<img src="{obj.image.url}" width ="100px"/>')
 
-    
         
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):

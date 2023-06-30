@@ -75,3 +75,7 @@ def generate_pdf(request):
     pdf.build(elements)
 
     return response
+
+
+def calculate_tax(total, tax_percentage) -> float:
+    return total * (tax_percentage / 100)

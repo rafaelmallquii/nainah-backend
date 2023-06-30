@@ -122,10 +122,8 @@ class Command(BaseCommand):
                 city=city,
                 tax_rate=tax_rate,
                 shipment_amount=shipment_amount,
-                
             )
             
-        
         self.stdout.write(self.style.SUCCESS('Initial settings created successfully.'))
         
 # exectute the command in the terminal

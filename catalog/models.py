@@ -15,10 +15,16 @@ class Catalog(models.Model):
     def __str__(self):
         return f'{self.name}'
     
+    order = models.PositiveIntegerField(
+        default=0,
+        blank=False,
+        null=False,
+    )
+    
     class Meta:
         verbose_name = 'Catalog'
         verbose_name_plural = 'Catalogs'
-        ordering = ['-created_at']
+        ordering = ['order']
         
 class ProductCatalog(models.Model):
     catalog = models.ForeignKey(Catalog, on_delete=models.CASCADE)

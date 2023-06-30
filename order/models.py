@@ -6,6 +6,7 @@ from django.db.models.signals import pre_save, post_save, post_delete
 from django.dispatch import receiver
 from customer.models import Customer
 from setting.models import TaxAndShipment
+from .utils import calculate_tax
 
 class Order(models.Model):
 
@@ -61,14 +62,15 @@ class Order(models.Model):
     updated = models.DateTimeField(auto_now=True)
     
     def save(self, *args, **kwargs):
-        if self.delivery_option == 'delivery':
-            pass
-            # self.shipping_charge = ShippingCharge.objects.first().amount
+        if self.delivery_option == 'shipping':
+            self.shipping_charge = self.city.shipment_amount
         if self.delivery_option == 'store_pickup':
             self.shipping_charge = 0
-        if self.shipping_charge == 'free':
+        if self.shipping_charge == 'delivery':
             self.shipping_charge = 0
-            
+        
+        self.total = self.sub_total + self.tax + self.shipping_charge
+        
         super().save(*args, **kwargs)
     
     def order_id(self):
@@ -100,7 +102,6 @@ class OrderItem(models.Model):
 
     def __str__(self):
         return str(self.id)
-
     
     def save(self, *args, **kwargs):
         if self.product:
@@ -109,7 +110,7 @@ class OrderItem(models.Model):
             self.price = self.product.price
             self.image = self.product.image
             self.total_price = self.price * self.quantity
-            # self.tax = self.total_price * Tax.objects.first().tax_percentage
+            self.tax = calculate_tax(self.order.city.tax_rate, self.total_price)
             
         super().save(*args, **kwargs)
 
@@ -119,7 +120,7 @@ def update_order_total(sender, instance, **kwargs):
     order = instance.order
     order.sub_total = order.orderitem_set.aggregate(total=models.Sum('total_price'))['total'] or 0.00
     order.tax = order.orderitem_set.aggregate(tax=models.Sum('tax'))['tax'] or 0.00
-    # order.total = order.sub_total + order.tax + order.shipping_charge
+    order.total = order.sub_total + order.tax + order.shipping_charge
     
     order.save()
 
