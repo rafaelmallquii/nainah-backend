@@ -6,8 +6,10 @@ certifi==2023.5.7
 charset-normalizer==3.1.0
 colander==2.0
 Django==4.2.1
+django-admin-easy==0.7.0
 django-admin-numeric-filter==0.1.9
 django-admin-rangefilter==0.10.0
+django-admin-sortable2==2.1.8
 django-ckeditor==6.5.1
 django-colorfield==0.8.0
 django-cors-headers==4.1.0
