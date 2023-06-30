@@ -201,3 +201,10 @@ input[type="number"] {
   border-radius: 5px;
   padding: 5px;
 }
+
+.help, .help-tooltip {
+  height: 12px;
+  width: 12px;
+  padding: 0 !important;
+  margin: 0;
+}

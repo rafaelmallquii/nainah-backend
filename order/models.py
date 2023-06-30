@@ -5,8 +5,7 @@ from django.core.validators import MinValueValidator
 from django.db.models.signals import pre_save, post_save, post_delete
 from django.dispatch import receiver
 from customer.models import Customer
-from setting.models import Tax, ShippingCharge
-import uuid
+from setting.models import TaxAndShipment
 
 class Order(models.Model):
 
@@ -32,7 +31,7 @@ class Order(models.Model):
     email = models.EmailField(blank=True, null=True)
     phone = models.CharField(max_length=100)
     address = models.TextField()
-    city = models.CharField(max_length=100)
+    city = models.ForeignKey(TaxAndShipment, on_delete=models.PROTECT, help_text='Select City.')
     postal_code = models.CharField(max_length=100)
     country = models.CharField(max_length=100, default='US')
     paid = models.BooleanField(default=False)
@@ -40,31 +39,31 @@ class Order(models.Model):
     delivery_option = models.CharField(
         max_length=20,
         choices=(
+            ('shipping', 'Shipping'),
+            ('store_pickup', 'Store Pickup'),
             ('delivery', 'Delivery'),
-            ('store_pickup', 'Store Pickup')
         ),
-        default='delivery'
+        default='shipping'
     )
     
     status = models.CharField(max_length=2, choices=ORDER_STATUS_CHOICES, default=PENDING)
     products = models.ManyToManyField(ProductVariant, through='OrderItem', default=0.00)
     sub_total = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
-    tax = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+    tax = models.DecimalField(max_digits=10, decimal_places=3, default=0.00)
     shipping_charge = models.DecimalField(
         default=0,
         max_digits=10,
         decimal_places=2,
-        blank=True,
-        null=True
     )
-    total = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     
+    total = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     
     def save(self, *args, **kwargs):
         if self.delivery_option == 'delivery':
-            self.shipping_charge = ShippingCharge.objects.first().amount
+            pass
+            # self.shipping_charge = ShippingCharge.objects.first().amount
         if self.delivery_option == 'store_pickup':
             self.shipping_charge = 0
         if self.shipping_charge == 'free':
@@ -83,7 +82,7 @@ class Order(models.Model):
         ordering = ('-created',)
 
     def __str__(self):
-        return f'Order {self.id}'
+        return f'Order {self.pk}'
     
 
 
@@ -101,6 +100,7 @@ class OrderItem(models.Model):
 
     def __str__(self):
         return str(self.id)
+
     
     def save(self, *args, **kwargs):
         if self.product:
@@ -109,7 +109,7 @@ class OrderItem(models.Model):
             self.price = self.product.price
             self.image = self.product.image
             self.total_price = self.price * self.quantity
-            self.tax = self.total_price * Tax.objects.first().tax_percentage
+            # self.tax = self.total_price * Tax.objects.first().tax_percentage
             
         super().save(*args, **kwargs)
 
@@ -117,17 +117,11 @@ class OrderItem(models.Model):
 @receiver([post_save, post_delete], sender=OrderItem)
 def update_order_total(sender, instance, **kwargs):
     order = instance.order
-    order.sub_total = order.orderitem_set.aggregate(
-        total=models.Sum('total_price'))['total'] or 0.00
-    
-    order.tax = order.orderitem_set.aggregate(
-        tax=models.Sum('tax'))['tax'] or 0.00
-    
-    order.total = order.sub_total + order.tax + order.shipping_charge
+    order.sub_total = order.orderitem_set.aggregate(total=models.Sum('total_price'))['total'] or 0.00
+    order.tax = order.orderitem_set.aggregate(tax=models.Sum('tax'))['tax'] or 0.00
+    # order.total = order.sub_total + order.tax + order.shipping_charge
     
     order.save()
-
-
 
 post_save.connect(update_order_total, sender=OrderItem)
 post_delete.connect(update_order_total, sender=OrderItem)

@@ -42,31 +42,23 @@ class Currency(models.Model):
         verbose_name_plural = 'Currency'
         
 
-class Tax(models.Model):
-    setting = models.OneToOneField(Setting, on_delete=models.CASCADE)
-    tax_percentage = models.DecimalField(
+class TaxAndShipment(models.Model):
+    setting = models.ForeignKey(Setting, on_delete=models.CASCADE)
+    city = models.CharField(max_length=100, help_text='Enter city name.')
+    tax_rate = models.DecimalField(
         max_digits=10,
-        decimal_places=4,
-        help_text='Enter tax percentage in decimal format. Example: 0.05 for 5% tax.',
-        blank=True,
-        null=True
+        decimal_places=3,
+        help_text='Enter tax rate e.g. 5.00 for 5% tax.',
+        default=0.00
     )
 
     def __str__(self):
-        return f'{self.tax_percentage}'
+        return f'{self.city}'
 
     class Meta:
-        verbose_name_plural = 'Tax'
+        verbose_name_plural = 'Taxes'
         
-class ShippingCharge(models.Model):
-    setting = models.OneToOneField(Setting, on_delete=models.CASCADE)
-    amount = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
-
-    def __str__(self):
-        return f'{self.amount}'
-
-    class Meta:
-        verbose_name_plural = 'Shipping'
+        
 
 class SiteMeta(models.Model):
     setting = models.OneToOneField(Setting, on_delete=models.CASCADE)
@@ -82,4 +74,3 @@ class SiteMeta(models.Model):
 
     class Meta:
         verbose_name_plural = 'Site Meta'
-        
