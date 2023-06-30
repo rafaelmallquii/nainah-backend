@@ -21,28 +21,16 @@ class OrderItemInline(admin.TabularInline):
         
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-
+    date_hierarchy = 'created'
     inlines = [
         OrderItemInline,
     ]
     
-    date_hierarchy = 'created'
-
-    list_display = ['order_id', 'customer', 'paid', 'status', '_sub_total', 'tax', 'shipping_charge', 'total', 'created', 'updated',]
+    list_display = ['order_id', 'customer', 'paid', 'status', 'sub_total', 'tax', 'shipping_charge', '_total', 'created', 'updated',]
     search_fields = ['paid', 'status']
     list_filter = ['paid', 'status']
     list_per_page = 10
-    
-    # exclude = ['total',]
-    readonly_fields = ['sub_total', 'tax', 'shipping_charge','total',]
-    
-    # sumarle un USD$ al total
-    def _sub_total(self, obj):
-        currency = Currency.objects.first()
-
-        if obj.total is not None:
-            return mark_safe(f'<b> {currency.currency_symbol} {obj.sub_total}</b>')
-        return mark_safe(f'<b>{currency.currency_symbol} 0.00</b>')
+    readonly_fields = ['sub_total', 'tax', 'shipping_charge', '_total',]
     
     class Media:
         css = {
@@ -52,6 +40,11 @@ class OrderAdmin(admin.ModelAdmin):
         js = ('js/order/order.js',)
         
     actions = ['export_as_pdf']
+
+    @easy.with_tags()
+    def _total(self, obj):
+        c = Currency.objects.first()
+        return f'<b>{c.currency_code} {c.currency_symbol} {obj.total}</b>'
 
     def export_as_pdf(self, request, queryset):
         for order in queryset:
