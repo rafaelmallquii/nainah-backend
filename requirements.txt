@@ -6,6 +6,7 @@ certifi==2023.5.7
 charset-normalizer==3.1.0
 colander==2.0
 Django==4.2.1
+django-addresses==0.1
 django-admin-easy==0.7.0
 django-admin-numeric-filter==0.1.9
 django-admin-rangefilter==0.10.0
@@ -14,7 +15,9 @@ django-ckeditor==6.5.1
 django-colorfield==0.8.0
 django-cors-headers==4.1.0
 django-countries==7.5.1
+django-extensions==3.2.3
 django-filter==23.2
+django-invoice==0.3.2
 django-jazzmin==2.6.0
 django-js-asset==2.0.0
 django-rest-framework==0.1.0

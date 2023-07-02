@@ -21,7 +21,8 @@ from django.conf.urls.static import static
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
 from core import routing
 
-from order.views import OrderView, order_pdf
+from order.views import OrderView
+from order.reports import order_pdf
 
 urlpatterns = [
     path('admin/', admin.site.urls),

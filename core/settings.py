@@ -64,10 +64,6 @@ THIRD_PARTY_APPS = [
     'django_filters',
     'corsheaders',
     'adminsortable2',
-    'django_otp',
-    'django_otp.plugins.otp_totp',
-    'django_otp.plugins.otp_hotp',
-    'django_otp.plugins.otp_static',
     # 'debug_toolbar',
 ]
 
@@ -96,8 +92,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    
-    
     # 'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
@@ -312,4 +306,3 @@ SPECTACULAR_SETTINGS = {
 
 # CORS
 CORS_ALLOW_ALL_ORIGINS = True
-

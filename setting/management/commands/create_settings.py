@@ -77,6 +77,8 @@ class Command(BaseCommand):
         setting.site_description = 'A family-owned business that wants to offer you not just a place to shop, but a wonderful experience.'
         setting.site_address = '54 Allen St, Springfield, MA 01108 USA'
         setting.site_phone = '+1 413-273- 9878'
+        setting.site_reg_no = '00-000-000'
+        setting.site_website = 'https://nainahcollection.com'
         setting.site_email = 'infonainah@nainahcollection.com'
         setting.site_facebook = 'https://www.facebook.com/nainahcollection'
         setting.site_instagram = 'https://www.instagram.com/nainahcollectioncompany/'

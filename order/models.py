@@ -27,14 +27,18 @@ class Order(models.Model):
     )
     
     customer = models.ForeignKey(Customer, on_delete=models.PROTECT, null=True, blank=True)
-    is_for_same_customer = models.BooleanField(default=False)
-    name = models.CharField(max_length=100)
-    email = models.EmailField(blank=True, null=True)
-    phone = models.CharField(max_length=100)
-    address = models.TextField()
+
+    email = models.EmailField()
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    
+    address_line_1 = models.CharField(max_length=100)
+    address_line_2 = models.CharField(max_length=100, default='', blank=True)
+    
     city = models.ForeignKey(TaxAndShipment, on_delete=models.CASCADE, help_text='Select City.', default=30)
-    postal_code = models.CharField(max_length=100)
-    country = models.CharField(max_length=100, default='US')
+    state = models.CharField(max_length=100)
+    postcode = models.CharField(max_length=10)
+    country = models.CharField(max_length=100, default='United States of America')
     paid = models.BooleanField(default=False)
     
     delivery_option = models.CharField(

@@ -13,6 +13,8 @@ class Setting(models.Model):
     site_address = models.CharField(max_length=200)
     site_phone = models.CharField(max_length=20)
     site_email = models.CharField(max_length=100)
+    site_reg_no = models.CharField(max_length=100)
+    site_website = models.CharField(max_length=100)
     site_facebook = models.CharField(max_length=100)
     site_instagram = models.CharField(max_length=100)
     site_tiktok = models.CharField(max_length=100)
