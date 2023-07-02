@@ -2,10 +2,9 @@ from django.contrib import admin
 from django.utils.safestring import mark_safe
 from .models import Order, OrderItem
 from .forms import InlineOrderItemForm
-from .utils import generate_pdf
 from setting.models import Currency
 import easy
-
+from django.urls import reverse
 
 class OrderItemInline(admin.TabularInline):
     form = InlineOrderItemForm
@@ -26,29 +25,25 @@ class OrderAdmin(admin.ModelAdmin):
         OrderItemInline,
     ]
     
-    list_display = ['order_id', 'customer', 'paid', 'status', 'sub_total', 'tax', 'shipping_charge', '_total', 'created', 'updated',]
+    list_display = ['order_id', 'customer', 'paid', 'status', 'sub_total', 'tax', 'shipping_charge', '_total', 'created', 'updated', 'pdf',]
     search_fields = ['paid', 'status']
     list_filter = ['paid', 'status']
     list_per_page = 10
     readonly_fields = ['sub_total', 'tax', 'shipping_charge', '_total',]
+    exclude = ['total']
+    search_fields = ['customer__email',]
+    
+    # raw_id_fields = ['customer']
     
     class Media:
-        css = {
-            'all': ('css/order/order.css',)
-        }
-        
+        css = {'all': ('css/order/order.css',)}
         js = ('js/order/order.js',)
-        
-    actions = ['export_as_pdf']
 
     @easy.with_tags()
     def _total(self, obj):
         c = Currency.objects.first()
         return f'<b>{c.currency_code} {c.currency_symbol} {obj.total}</b>'
-
-    def export_as_pdf(self, request, queryset):
-        for order in queryset:
-            pdf_response = generate_pdf(order)
-            return pdf_response
-
-    export_as_pdf.short_description = "Export selected orders as PDF"
+    
+    def pdf(self, obj):
+        return mark_safe(f'<a href="/order-pdf/{obj.pk}" target="_blank"><li class="fa fa-print pdf"></li></a>')
+    

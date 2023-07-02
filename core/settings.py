@@ -64,6 +64,10 @@ THIRD_PARTY_APPS = [
     'django_filters',
     'corsheaders',
     'adminsortable2',
+    'django_otp',
+    'django_otp.plugins.otp_totp',
+    'django_otp.plugins.otp_hotp',
+    'django_otp.plugins.otp_static',
     # 'debug_toolbar',
 ]
 
@@ -233,8 +237,7 @@ JAZZMIN_SETTINGS = {
         "transaction": ["transaction.Transaction"],
         "newsletter": ["newsletter.Newsletter"],
         "setting": ["setting.Setting"],
-    },
-    # buttons 
+    },    
 }
 
 JAZZMIN_UI_TWEAKS = {
@@ -309,3 +312,4 @@ SPECTACULAR_SETTINGS = {
 
 # CORS
 CORS_ALLOW_ALL_ORIGINS = True
+

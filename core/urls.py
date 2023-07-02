@@ -21,7 +21,7 @@ from django.conf.urls.static import static
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
 from core import routing
 
-from order.views import OrderView
+from order.views import OrderView, order_pdf
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -37,6 +37,9 @@ urlpatterns = [
     # Optional UI:
     path('api/docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
     path('redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
+    
+    # # PDF Reports
+    path('order-pdf/<int:pk>', order_pdf, name='order-pdf'),
     
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

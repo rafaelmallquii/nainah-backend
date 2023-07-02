@@ -69,7 +69,12 @@ class Order(models.Model):
         if self.shipping_charge == 'delivery':
             self.shipping_charge = 0
         
-        self.total = self.sub_total + self.tax + self.shipping_charge
+        try:
+            if self.orderitem_set.all().count() > 0:
+                
+                self.total = self.sub_total + self.tax + self.shipping_charge
+        except:
+            pass
         
         super().save(*args, **kwargs)
     
