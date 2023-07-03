@@ -35,7 +35,7 @@ class Order(models.Model):
     address_line_1 = models.CharField(max_length=100)
     address_line_2 = models.CharField(max_length=100, default='', blank=True)
     
-    city = models.ForeignKey(TaxAndShipment, on_delete=models.CASCADE, help_text='Select City.', default=30)
+    city = models.ForeignKey(TaxAndShipment, on_delete=models.CASCADE, help_text='Select City.')
     state = models.CharField(max_length=100)
     postcode = models.CharField(max_length=10)
     country = models.CharField(max_length=100, default='United States of America')

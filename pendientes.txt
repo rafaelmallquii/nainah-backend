@@ -4,13 +4,23 @@ verificar que la fecha de vencimiento y el monto minimo cumplan y restarle, conv
 
 transaccion id (pasarela)
 
+implementar pasarela de pago 
 
 ===dashboard / backend===
 
 preview de imagen catalogo y settings
 
+implementar pasarela de pago
+
 refound (pasarela)
 
 calcular descuento en %
 
-calcular impuestos para cada estado
+calcular impuestos para cada estado (listo)
+
+agregarle el descuento a la orden y configurarlo en el pdf y tambien las notas pendientes
+
+
+ == customer ==
+ # send mail with activation link and username and password
+ # wishlist define

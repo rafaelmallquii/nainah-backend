@@ -202,7 +202,7 @@ input[type="number"] {
   padding: 5px;
 }
 
-.help, .help-tooltip {
+.help-tooltip {
   height: 12px;
   width: 12px;
   padding: 0 !important;
