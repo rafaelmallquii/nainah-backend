@@ -9,7 +9,6 @@ from setting.models import TaxAndShipment
 from .utils import calculate_tax
 from coupon.models import Coupon
 
-default_city = TaxAndShipment.objects.first()
 ORDER_STATUS_CHOICES = (
     ('P', 'Pending'),
     ('PR', 'Processing'),
@@ -27,7 +26,7 @@ class Order(models.Model):
     last_name = models.CharField(max_length=100)
     address_line_1 = models.CharField(max_length=100)
     address_line_2 = models.CharField(max_length=100, default='', blank=True)
-    city = models.ForeignKey(TaxAndShipment, on_delete=models.CASCADE, default=default_city, help_text='Select City.')
+    city = models.ForeignKey(TaxAndShipment, on_delete=models.PROTECT, help_text='Select City.')
     state = models.CharField(max_length=100)
     postcode = models.CharField(max_length=10)
     country = models.CharField(max_length=100, default='United States of America')

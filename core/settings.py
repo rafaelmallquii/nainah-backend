@@ -64,6 +64,7 @@ THIRD_PARTY_APPS = [
     'django_filters',
     'corsheaders',
     'adminsortable2',
+    'django_summernote',
     # 'debug_toolbar',
 ]
 
@@ -201,7 +202,9 @@ JAZZMIN_SETTINGS = {
     # manytoone and foreignkey lookups & dropdowns
     "related_modal_active": True,
     "navigation_expanded": True,
-    "hide_apps": [],
+    "hide_apps": [
+        'django_summernote',
+    ],
     "custom_css": "css/custom.css", 
     "custom_js": "js/custom.js",
     "icons": {
@@ -219,6 +222,7 @@ JAZZMIN_SETTINGS = {
         "shipment.Shipment": "fas fa-truck",
         "transaction.Transaction": "fas fa-credit-card",
         "newsletter.Newsletter": "fas fa-rss-square",
+        "newsletter.Subscriber": "fas fa-user-plus",
         "setting.Setting": "fas fa-cog",
     },
     # change order of models in admin sidebar

@@ -1,9 +1,23 @@
+from django import forms
 from django.contrib import admin
+from django_summernote.widgets import SummernoteWidget
 
-from .models import Newsletter
+from .models import Newsletter, Subscriber
 
-# Register your models here.
+class NewsletterAdminForm(forms.ModelForm):
+    class Meta:
+        model = Newsletter
+        fields = '__all__'
+        widgets = {
+            'content': SummernoteWidget(attrs={'label': ''}),
+        }
 
 @admin.register(Newsletter)
 class NewsletterAdmin(admin.ModelAdmin):
-    change_list_template = 'admin/newsletter/change_list.html'
+    form = NewsletterAdminForm
+
+
+
+@admin.register(Subscriber)
+class SubscriberAdmin(admin.ModelAdmin):
+    pass

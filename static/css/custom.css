@@ -208,3 +208,8 @@ input[type="number"] {
   padding: 0 !important;
   margin: 0;
 }
+
+label[for="id_content"] {
+  /* Estilos para el label */
+  display: none;
+}
