@@ -11,4 +11,4 @@ class CouponAdmin(admin.ModelAdmin):
     search_fields = ('code',)
     
     def _discount(self, obj):
-        return "{}%".format(obj.discount)
+        return "{}%".format(obj.value)

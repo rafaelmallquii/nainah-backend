@@ -190,10 +190,14 @@ JAZZMIN_SETTINGS = {
     "site_logo": "images/logo.png",
     "site_favicon": "images/logo.png",
     "welcome_sign": "Welcome to Nainah Collection",
+    
+    # tabs
     "changeform_format": "horizontal_tabs",
+    "changeform_format_overrides": {},
+    
     "search_model": ["product.Product"],
     "copyright": "Nainah Collection",
-    "show_ui_builder": False,
+    "show_ui_builder": True,
     # manytoone and foreignkey lookups & dropdowns
     "related_modal_active": True,
     "navigation_expanded": True,
@@ -263,7 +267,8 @@ JAZZMIN_UI_TWEAKS = {
         "warning": "btn-warning",
         "danger": "btn-outline-danger",
         "success": "btn-outline-success"
-    }
+    },
+    'actions_sticky_top': True,
 }
 
 # default auth user model
@@ -306,3 +311,11 @@ SPECTACULAR_SETTINGS = {
 
 # CORS
 CORS_ALLOW_ALL_ORIGINS = True
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'nainahwebsite@gmail.com'
+EMAIL_HOST_PASSWORD = 'ilmpchbcwkiujbhe'
+
+# DEFAULT_FROM_EMAIL = 'nainahwebsite@gmail.com'
