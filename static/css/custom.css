@@ -213,3 +213,9 @@ label[for="id_content"] {
   /* Estilos para el label */
   display: none;
 }
+
+#jazzy-logo {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}

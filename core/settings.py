@@ -203,7 +203,7 @@ JAZZMIN_SETTINGS = {
     "related_modal_active": True,
     "navigation_expanded": True,
     "hide_apps": [
-        'django_summernote',
+        # 'django_summernote',
     ],
     "custom_css": "css/custom.css", 
     "custom_js": "js/custom.js",
@@ -223,6 +223,7 @@ JAZZMIN_SETTINGS = {
         "transaction.Transaction": "fas fa-credit-card",
         "newsletter.Newsletter": "fas fa-rss-square",
         "newsletter.Subscriber": "fas fa-user-plus",
+        "django_summernote.attachment": "fas fa-regular fa-image",
         "setting.Setting": "fas fa-cog",
     },
     # change order of models in admin sidebar
@@ -238,6 +239,7 @@ JAZZMIN_SETTINGS = {
         "shipment": ["shipment.Shipment"],
         "transaction": ["transaction.Transaction"],
         "newsletter": ["newsletter.Newsletter"],
+        "django_summernote": ["django_summernote.attachment"],
         "setting": ["setting.Setting"],
     },    
 }
@@ -259,7 +261,7 @@ JAZZMIN_UI_TWEAKS = {
     "sidebar_nav_small_text": False,
     "sidebar_disable_expand": False,
     "sidebar_nav_child_indent": False,
-    "sidebar_nav_compact_style": False,
+    "sidebar_nav_compact_style": True,
     "sidebar_nav_legacy_style": False,
     "sidebar_nav_flat_style": False,
     "theme": "default",
