@@ -6,4 +6,4 @@ from .models import Newsletter
 
 @admin.register(Newsletter)
 class NewsletterAdmin(admin.ModelAdmin):
-    pass
+    change_list_template = 'admin/newsletter/change_list.html'
