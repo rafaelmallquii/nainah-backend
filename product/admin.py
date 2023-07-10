@@ -32,13 +32,6 @@ class ProductAdmin(admin.ModelAdmin):
     # list_editable = ['price', 'enabled', ]
     actions_on_bottom = True
     actions_on_top = False
-    
-    # show variant in admin
-    def get_queryset(self, request):
-        qs = super(ProductAdmin, self).get_queryset(request)
-        return qs.prefetch_related('productvariant_set')
-
-
     date_hierarchy = 'created_at'
 
     # readonly_fields = ('current_image', )
@@ -63,14 +56,37 @@ class ProductAdmin(admin.ModelAdmin):
 
     readonly_fields = ['current_image',]
 
-    list_display = ['product_id', 'preview_image', 'title', 'enabled', 'category', ]
+    list_display = ['product_id', 'preview_image', 'title', 'enabled', 'category', 'display_price', 'display_stock']
+
     search_fields = ['title',]
     list_filter = ['category', 'enabled', 'trending']
 
     list_per_page = 10
 
-    # change html of field trending
+    ordering = ('title', 'productvariant__price', 'productvariant__stock')
+    
+    def display_price(self, obj):
+        variant = obj.variants().first()
+        if variant:
+            return variant.price
+        return None
 
+    def display_stock(self, obj):
+        variant = obj.variants().first()
+        if variant:
+            return variant.stock
+        return None
+    
+    display_price.short_description = 'Price'
+    display_stock.short_description = 'Stock'
+
+    display_price.admin_order_field = 'productvariant__price'
+    display_stock.admin_order_field = 'productvariant__stock'
+    
+
+    
+    
+    
     def trending(self, obj):
         if obj.trending:
             return mark_safe('<span style="color: green;">Yes</span>')
