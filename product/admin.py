@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Product, ProductImage, Tag, MetaAttribute, ProductVariant
+from .models import Product, Tag, MetaAttribute, ProductVariant #  ProductImage,
 
 from django.utils.safestring import mark_safe
 from .forms import ProductForm, InlineProductForm
@@ -12,10 +12,10 @@ class MetaAttributeInline(admin.StackedInline):
     extra = 1
 
 
-class ProductImageInline(admin.StackedInline):
-    model = ProductImage
-    extra = 1
-    readonly_fields = ['current_image',]
+# class ProductImageInline(admin.StackedInline):
+#     model = ProductImage
+#     extra = 1
+#     readonly_fields = ['current_image',]
 
 
 class ProductVariantInline(admin.StackedInline):
@@ -39,7 +39,7 @@ class ProductAdmin(admin.ModelAdmin):
 
     inlines = [
         ProductVariantInline,
-        ProductImageInline,
+        # ProductImageInline,
         MetaAttributeInline,
     ]
 

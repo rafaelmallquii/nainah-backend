@@ -3,4 +3,6 @@ from .models import Transaction
 
 # Register your models here.
 
-admin.site.register(Transaction)
+@admin.register(Transaction)
+class AdminTransaction(admin.ModelAdmin):
+    pass

@@ -60,7 +60,7 @@ class ProductVariant(models.Model):
     title = models.CharField(max_length=100)
     color = models.CharField(max_length=100,choices=COLOR_CHOICES, blank=True, null=True)
     size = models.CharField(max_length=100, choices=SIZE_CHOICES, blank=True, null=True)
-    stock = models.PositiveBigIntegerField(default=1, help_text='Stock of this variant')
+    stock = models.IntegerField(default=1, help_text='Stock of this variant')
     price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00, validators=[validator_price])
     sale_price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     image = models.ImageField(upload_to='images/products')
@@ -71,15 +71,15 @@ class ProductVariant(models.Model):
     def __str__(self):
         return f'{self.title} - {self.color} - {self.size}" - ${self.price}'
 
-class ProductImage(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='images/products')
+# class ProductImage(models.Model):
+#     product = models.ForeignKey(Product, on_delete=models.CASCADE)
+#     image = models.ImageField(upload_to='images/products')
 
-    def __str__(self):
-        return self.product.title
+#     def __str__(self):
+#         return self.product.title
     
-    def current_image(self):
-        return mark_safe(f'<img src="{self.image.url}" width="200" id="" />')
+#     def current_image(self):
+#         return mark_safe(f'<img src="{self.image.url}" width="200" id="" />')
 
 class MetaAttribute(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)

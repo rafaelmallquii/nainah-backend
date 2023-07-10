@@ -50,6 +50,8 @@ def order_pdf(request, pk):
     order = Order.objects.get(pk=pk)
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = 'inline; filename="invoice.pdf"'
+    # change title of html head 
+    response['Content-Title'] = 'Invoice'
 
     s = Setting.objects.first()
 

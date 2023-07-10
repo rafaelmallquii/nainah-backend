@@ -8,6 +8,7 @@ from customer.models import Customer
 from setting.models import TaxAndShipment
 from .utils import calculate_tax
 from coupon.models import Coupon
+from django.db.models import F
 
 ORDER_STATUS_CHOICES = (
     ('P', 'Pending'),
@@ -55,7 +56,7 @@ class Order(models.Model):
     
     def calculate_coupon_discount(self):
         if self.coupon:
-            self.discount = self.sub_total * (self.coupon.value / 100)
+            self.discount = float(self.sub_total) * float((self.coupon.value / 100))
         else:
             self.discount = 0
     
@@ -75,6 +76,7 @@ class Order(models.Model):
             pass
     
     def save(self, *args, **kwargs):
+        
         self.calculate_shipping()
         self.calculate_coupon_discount()
         self.calculcate_orderitem_total()
@@ -91,7 +93,7 @@ class Order(models.Model):
         ordering = ('-created',)
 
     def __str__(self):
-        return f'Order {self.pk}'
+        return f'Order:#{str(self.pk).zfill(4)} - ${self.total}'
     
 
 class OrderItem(models.Model):
@@ -125,9 +127,29 @@ def update_order_total(sender, instance, **kwargs):
     order = instance.order
     order.sub_total = order.orderitem_set.aggregate(total=models.Sum('total_price'))['total'] or 0.00
     order.tax = order.orderitem_set.aggregate(tax=models.Sum('tax'))['tax'] or 0.00
-    order.total = order.sub_total + order.tax + order.shipping_charge - order.discount
+    order.total = float(order.sub_total) + float(order.tax) + float(order.shipping_charge) - float(order.discount)
     
     order.save()
 
 post_save.connect(update_order_total, sender=OrderItem)
 post_delete.connect(update_order_total, sender=OrderItem)
+
+
+@receiver(pre_save, sender=Order)
+def check_variable_change(sender, instance, **kwargs):
+    if instance.pk:
+        saved_instance = Order.objects.get(pk=instance.pk)
+        if not saved_instance.paid and instance.paid:
+            print('Reduce stock')
+            # Deduct stock from product variant
+            for item in instance.orderitem_set.all():
+                product_variant = item.product
+                product_variant.stock -= item.quantity
+                product_variant.save()
+        elif saved_instance.paid and not instance.paid:
+            print('Add stock')
+            # Add stock to product variant
+            for item in instance.orderitem_set.all():
+                product_variant = item.product
+                product_variant.stock += item.quantity
+                product_variant.save()
