@@ -1,0 +1,5 @@
+{% extends "admin/change_list.html" %}
+{% block object-tools-items %}
+        <a href="{% url 'product-pdf' %}" target="_blank" class="btn btn-outline-info float-right">Print</a>
+    {{ block.super }}
+{% endblock %}
