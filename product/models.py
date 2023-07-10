@@ -55,9 +55,13 @@ class Product(models.Model):
     def variants(self):
         return ProductVariant.objects.filter(product=self)
     
+    def meta_attributes(self):
+        return MetaAttribute.objects.filter(product=self)
+    
     product_id.short_description = 'ID'
     product_id.admin_order_field = 'pk'
     
+
 class ProductVariant(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
@@ -85,10 +89,11 @@ class ProductVariant(models.Model):
 #         return mark_safe(f'<img src="{self.image.url}" width="200" id="" />')
 
 class MetaAttribute(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    meta_key = models.CharField(max_length=100)
-    meta_value = models.CharField(max_length=100)
+    product = models.OneToOneField(Product, on_delete=models.CASCADE)
+    meta_title = models.CharField(max_length=100, blank=True, null=True)
+    meta_description = models.CharField(max_length=100, blank=True, null=True)
+    meta_keywords = models.CharField(max_length=100, blank=True, null=True)
+    meta_image = models.ImageField(upload_to='images/products', blank=True, null=True)
 
     def __str__(self):
         return self.product.title
-

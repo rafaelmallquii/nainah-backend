@@ -32,6 +32,12 @@ class ProductAdmin(admin.ModelAdmin):
     # list_editable = ['price', 'enabled', ]
     actions_on_bottom = True
     actions_on_top = False
+    
+    # show variant in admin
+    def get_queryset(self, request):
+        qs = super(ProductAdmin, self).get_queryset(request)
+        return qs.prefetch_related('productvariant_set')
+
 
     date_hierarchy = 'created_at'
 
