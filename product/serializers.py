@@ -1,9 +1,15 @@
 from rest_framework import serializers
-from .models import Product, Tag
+from .models import Product, ProductVariant, Tag
 from category.serializers import CategorySerializer
 
+class ProductVariantSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProductVariant
+        fields = '__all__'
+        
 class ProductSerializer(serializers.ModelSerializer):
     category = CategorySerializer()
+    variants = ProductVariantSerializer(many=True)
     
     class Meta:
         model = Product

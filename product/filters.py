@@ -5,12 +5,13 @@ from django_filters import rest_framework as filters
 from .models import Tag
 
 class ProductFilter(django_filters.FilterSet):
-    enablaed = django_filters.BooleanFilter(field_name='enabled')
+    enabled = django_filters.BooleanFilter(field_name='enabled')
     tags = filters.ModelMultipleChoiceFilter(
         field_name='tags',
         queryset=Tag.objects.all()
     )
     
+    category = django_filters.NumberFilter(field_name='category__id')
     trending = django_filters.BooleanFilter(field_name='trending')    
     color = django_filters.CharFilter(field_name='productvariant__color', lookup_expr='icontains')
     size = django_filters.CharFilter(field_name='productvariant__size', lookup_expr='icontains')

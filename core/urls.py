@@ -24,6 +24,8 @@ from core import routing
 from order.views import OrderView
 from order.reports import order_pdf
 
+from product.views import AvailableColorsAPIView, AvailableSizesAPIView
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(routing.router.urls)),
@@ -43,6 +45,12 @@ urlpatterns = [
     path('order-pdf/<int:pk>', order_pdf, name='order-pdf'),
     
     path('summernote/', include('django_summernote.urls')),
+    
+    # product endpoints
+    path('api/colors/', AvailableColorsAPIView.as_view(), name='colors'),
+    path('api/sizes/', AvailableSizesAPIView.as_view(), name='sizes'),
+
+    
     
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

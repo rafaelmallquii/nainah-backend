@@ -1,7 +1,7 @@
 from rest_framework import viewsets
 from rest_framework.pagination import PageNumberPagination
 from .serializers import ProductSerializer, TagSerializer
-from .models import Product
+from .models import Product, ProductVariant
 from drf_spectacular.utils import extend_schema
 from django_filters.rest_framework import DjangoFilterBackend
 from .filters import ProductFilter
@@ -39,3 +39,14 @@ class ProductViewSet(viewsets.ReadOnlyModelViewSet):
         'productvariant__color',
         'productvariant__size',
     ]
+
+
+class AvailableColorsAPIView(APIView):
+    def get(self, request):
+        colors = ProductVariant.objects.exclude(color__isnull=True).values_list('color', flat=True).distinct()
+        return Response(colors)
+    
+class AvailableSizesAPIView(APIView):
+    def get(self, request):
+        sizes = ProductVariant.objects.exclude(size__isnull=True).values_list('size', flat=True).distinct()
+        return Response(sizes)

@@ -51,6 +51,9 @@ class Product(models.Model):
     def product_id(self):
         # Format order id to 4 digits
         return f'#{str(self.pk).zfill(4)}'
+
+    def variants(self):
+        return ProductVariant.objects.filter(product=self)
     
     product_id.short_description = 'ID'
     product_id.admin_order_field = 'pk'
