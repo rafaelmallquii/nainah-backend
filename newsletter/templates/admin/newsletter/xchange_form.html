@@ -3,4 +3,30 @@
 {% block content %}
     {{ block.super }}
     
+    <button type="button" class="btn btn-primary" onclick="send_message()">
+        <i class="fa fa-envelope"></i> Send Mail
+    </button>
+
+{% endblock %}
+
+{% block extrajs %}
+    {{ block.super }}
+    <script>
+        function send_message() {
+            var message = prompt("Enter message to send to all users");
+            if (message != null) {
+                $.ajax({
+                    url: "{% url 'admin:send_newsletter' %}",
+                    type: "POST",
+                    data: {
+                        message: message,
+                        csrfmiddlewaretoken: "{{ csrf_token }}"
+                    },
+                    success: function (data) {
+                        alert(data);
+                    }
+                });
+            }
+        }
+    </script>
 {% endblock %}

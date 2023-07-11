@@ -1,8 +1,8 @@
 {% extends "admin/change_list.html" %}
 
 {% block object-tools-items %}
-    {{ block.super }}
-        <a href="#" class="btn btn-primary" onclick="window.print(); return false;">
-            Imprimir
+        <a href="{% url 'admin:newsletter_newsletter_changelist' %}?action=send_newsletter">
+            <li class="fa fa-envelope"></li> Send Mail
         </a>
+    {{ block.super }}
 {% endblock %}

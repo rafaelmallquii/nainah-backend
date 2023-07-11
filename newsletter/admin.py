@@ -28,18 +28,17 @@ class NewsletterAdmin(admin.ModelAdmin):
             subscribers = Subscriber.objects.all()
             
             # send mail to all subscribers
-            for subscriber in subscribers:
-                subject = 'Nainah Collection Offert'
-                to_email = subscriber.email
-                from_email = 'no-reply@nainahcollection.com'
-                content = f'{newsletter.content}'
-                new_content = agregar_host(content, settings.HOST_NAME)
-                email = EmailMessage(subject, new_content, from_email, [to_email])
-                email.content_subtype = 'html'
-                email.send()
+        to_emails = [subscriber.email for subscriber in subscribers]
+        subject = newsletter.subject        
+        from_email = 'no-reply@nainahcollection.com'
+        content = f'{newsletter.content}'
+        new_content = agregar_host(content, settings.HOST_NAME)
+        email = EmailMessage(subject, new_content, from_email, to_emails)
+        email.content_subtype = 'html'
+        email.send()
                 
-            # message success
-            self.message_user(request, 'Newsletter sent successfully')
+        # message success
+        self.message_user(request, 'Newsletter sent successfully')
             
     send_newsletter.short_description = 'Send newsletter to all subscribers'
 
