@@ -5,7 +5,9 @@ from reportlab.platypus import SimpleDocTemplate, Paragraph, Table, TableStyle, 
 from io import BytesIO
 from PIL import Image as PilImage
 from .models import Product
+from django.contrib.admin.views.decorators import staff_member_required
 
+@staff_member_required
 def generate_product_report(request):
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = 'inline; filename="product_report.pdf"'

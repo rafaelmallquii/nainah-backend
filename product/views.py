@@ -40,6 +40,14 @@ class ProductViewSet(viewsets.ReadOnlyModelViewSet):
         'productvariant__size',
     ]
 
+    lookup_field = 'title'  # Campo para buscar por title
+
+    def retrieve(self, request, *args, **kwargs):
+        lookup_url_kwarg = self.lookup_url_kwarg or self.lookup_field
+
+        kwargs[self.lookup_field] = kwargs[lookup_url_kwarg]
+        return super().retrieve(request, *args, **kwargs)
+    
 
 class AvailableColorsAPIView(APIView):
     def get(self, request):

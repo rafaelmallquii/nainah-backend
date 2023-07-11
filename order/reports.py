@@ -9,12 +9,10 @@ from django.conf import settings
 from setting.models import Setting
 from order.models import Order
 from reportlab.lib.utils import ImageReader
-
-# inporta PIL y convertir png a jpg 
 from PIL import Image
+from django.contrib.admin.views.decorators import staff_member_required
 
 def draw_header(canvas, site_logo):
-    
     png = Image.open(os.path.join(str(settings.BASE_DIR) + site_logo.url))
     png.load() # required for png.split()
     background = Image.new("RGB", png.size, (255, 255, 255))
@@ -45,6 +43,7 @@ def draw_footer(canvas, note):
     textobject.textLine('Thank you for your business.')
     canvas.drawText(textobject)
 
+@staff_member_required
 def order_pdf(request, pk):
     """ Draws the invoice """
     order = Order.objects.get(pk=pk)
