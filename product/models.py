@@ -23,7 +23,7 @@ class Tag(models.Model):
         return f'{self.name}'
 
 class Product(models.Model):
-    enabled = models.BooleanField(default=False, help_text='Is this product Enabled?')
+    enabled = models.BooleanField(default=True, help_text='Is this product Enabled?')
     trending = models.BooleanField(default=False, help_text='Is this product in Trending?')
     category = models.ForeignKey(Category, on_delete=models.PROTECT, default=DEFAULT_CATEGORY)
     tags = models.ManyToManyField(Tag, blank=True, help_text='Select tags for this product')
