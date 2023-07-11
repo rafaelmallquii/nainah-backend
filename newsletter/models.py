@@ -1,6 +1,7 @@
 from django.db import models
 
 class Newsletter(models.Model):
+    subject = models.CharField(max_length=255)
     content = models.TextField()
     
     def __str__(self):

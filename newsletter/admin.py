@@ -18,7 +18,7 @@ class NewsletterAdminForm(forms.ModelForm):
 @admin.register(Newsletter)
 class NewsletterAdmin(admin.ModelAdmin):
     form = NewsletterAdminForm
-    
+    list_display = ['subject']
     actions = ['send_newsletter']
     
     def send_newsletter(self, request, queryset):
