@@ -23,7 +23,6 @@ class NewsletterAdmin(admin.ModelAdmin):
     
     def send_newsletter(self, request, queryset):
         # send mail to all subscribers with newsletter content as email body and subject as newsletter title
-        
         for newsletter in queryset:
             # get all subscribers
             subscribers = Subscriber.objects.all()
@@ -40,7 +39,7 @@ class NewsletterAdmin(admin.ModelAdmin):
                 email = EmailMessage(subject, content_modified, from_email, [to_email])
                 email.content_subtype = 'html'
                 email.send()
-            
+                
             # message success
             self.message_user(request, 'Newsletter sent successfully')
             
