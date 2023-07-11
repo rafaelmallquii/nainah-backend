@@ -325,3 +325,5 @@ EMAIL_HOST_USER = 'nainahwebsite@gmail.com'
 EMAIL_HOST_PASSWORD = 'ilmpchbcwkiujbhe'
 
 # DEFAULT_FROM_EMAIL = 'nainahwebsite@gmail.com'
+
+HOST_NAME = 'https://nainah.yotohosting.tk'

@@ -5,7 +5,7 @@ from .models import Newsletter, Subscriber
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
 from django.conf import settings
-import re
+from .utils import agregar_host
 
 class NewsletterAdminForm(forms.ModelForm):
     class Meta:
@@ -33,10 +33,8 @@ class NewsletterAdmin(admin.ModelAdmin):
                 to_email = subscriber.email
                 from_email = 'no-reply@nainahcollection.com'
                 content = f'{newsletter.content}'
-                pattern = r'src="([^"]+)"'
-                _host = 'https://nainah.yotohosting.tk'
-                content_modified = re.sub(pattern, r'src="{}\\1"'.format(_host), content)
-                email = EmailMessage(subject, content_modified, from_email, [to_email])
+                new_content = agregar_host(content, settings.HOST_NAME)
+                email = EmailMessage(subject, new_content, from_email, [to_email])
                 email.content_subtype = 'html'
                 email.send()
                 
