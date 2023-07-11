@@ -212,7 +212,8 @@ JAZZMIN_SETTINGS = {
     "related_modal_active": True,
     "navigation_expanded": True,
     "hide_apps": [
-        # 'django_summernote',
+        'django_summernote',
+        'authtoken', # token proxy
     ],
     "custom_css": "css/custom.css", 
     "custom_js": "js/custom.js",
