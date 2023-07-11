@@ -27,6 +27,13 @@ SECRET_KEY = 'django-insecure-9e%o308bxzqagsq#z^52e6@s%@60+8wj+x*k!1g7gb4tyf4@g4
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+if DEBUG:
+    HOST_NAME = 'https://nainah.yotohosting.tk'
+    FRONT_END_URL = 'localhost:3000'
+else:
+    HOST_NAME = 'https://admin.nainahcollection.com'
+    FRONT_END_URL = 'https://nainahcollection.com'
+    
 ALLOWED_HOSTS = ['*']
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
@@ -314,6 +321,10 @@ SPECTACULAR_SETTINGS = {
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
     # OTHER SETTINGS
+    'SWAGGER_UI_SETTINGS': {
+        'deepLinking': True,
+        'persistAuthorization': True,
+    },    
 }
 
 # CORS
@@ -327,8 +338,6 @@ EMAIL_HOST_PASSWORD = 'ilmpchbcwkiujbhe'
 
 # DEFAULT_FROM_EMAIL = 'nainahwebsite@gmail.com'
 
-HOST_NAME = 'https://nainah.yotohosting.tk'
-
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -341,12 +350,22 @@ REST_FRAMEWORK = {
 #    'AUTH_HEADER_TYPES': ('JWT',),
 # }
 
+DOMAIN = FRONT_END_URL
+SITE_NAME = 'Nainah Collection'
+
 DJOSER = {
+    'USER_MODEL': 'customer.Customer',
     'PASSWORD_RESET_CONFIRM_URL': '#/password/reset/confirm/{uid}/{token}',
-    'USERNAME_RESET_CONFIRM_URL': '#/username/reset/confirm/{uid}/{token}',
+    # 'USERNAME_RESET_CONFIRM_URL': '#/username/reset/confirm/{uid}/{token}',
     'ACTIVATION_URL': '#/activate/{uid}/{token}',
     'SEND_ACTIVATION_EMAIL': True,
-    'SERIALIZERS': {},
+    'SERIALIZERS': {
+        # 'current_user': 'customer.serializers.CustomerSerializer',
+        # 'user_update': 'customer.serializers.CustomerSerializer',
+        # 'user_create': 'customer.serializers.CustomerSerializer',
+        # 'user_delete': 'customer.serializers.CustomerSerializer',
+    },
+
 }
 
 SIMPLE_JWT = {
