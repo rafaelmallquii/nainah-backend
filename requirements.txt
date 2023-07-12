@@ -32,6 +32,7 @@ djangorestframework==3.14.0
 djangorestframework-simplejwt==5.2.2
 djoser==2.2.0
 drf-spectacular==0.26.3
+gunicorn==20.1.0
 idna==3.4
 inflection==0.5.1
 iso8601==2.0.0
