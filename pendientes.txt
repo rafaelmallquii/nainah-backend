@@ -24,3 +24,5 @@ agregarle el descuento a la orden y configurarlo en el pdf y tambien las notas p
  == customer ==
  # send mail with activation link and username and password
  # wishlist define
+
+# capturar ip en order

@@ -8,7 +8,7 @@ class Newsletter(models.Model):
         return f'Newsletter Template #{self.pk}'
 
 class Subscriber(models.Model):
-    email = models.EmailField()
+    email = models.EmailField(unique=True)
     
     def __str__(self):
         return self.email

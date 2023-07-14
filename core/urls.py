@@ -27,6 +27,8 @@ from order.reports import order_pdf
 from product.views import AvailableColorsAPIView, AvailableSizesAPIView
 from product.reports import generate_product_report
 
+from newsletter.views import SubscriberCreateAPIView
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(routing.router.urls)),
@@ -51,6 +53,9 @@ urlpatterns = [
     # product endpoints
     path('api/colors/', AvailableColorsAPIView.as_view(), name='colors'),
     path('api/sizes/', AvailableSizesAPIView.as_view(), name='sizes'),
+    
+    # Subscriber endpoints
+    path('api/subscriber/', SubscriberCreateAPIView.as_view(), name='subscriber'),
     
     # # Djoser Endpoints
     re_path(r'^auth/', include('djoser.urls')),

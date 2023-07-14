@@ -356,13 +356,13 @@ SITE_NAME = 'Nainah Collection'
 
 DJOSER = {
     'USER_MODEL': 'customer.Customer',
-    'PASSWORD_RESET_CONFIRM_URL': '#/password/reset/confirm/{uid}/{token}',
+    'PASSWORD_RESET_CONFIRM_URL': 'password/reset/confirm/{uid}/{token}',
     # 'USERNAME_RESET_CONFIRM_URL': '#/username/reset/confirm/{uid}/{token}',
-    'ACTIVATION_URL': '#/activate/{uid}/{token}',
+    'ACTIVATION_URL': 'activate/{uid}/{token}',
     'SEND_ACTIVATION_EMAIL': True,
     'SERIALIZERS': {
-        # 'current_user': 'customer.serializers.CustomerSerializer',
-        # 'user_update': 'customer.serializers.CustomerSerializer',
+        'current_user': 'customer.serializers.CurrentUserSerializer',
+        'user_update': 'customer.serializers.UpdateCustomerSerializer',
         # 'user_create': 'customer.serializers.CustomerSerializer',
         # 'user_delete': 'customer.serializers.CustomerSerializer',
     },

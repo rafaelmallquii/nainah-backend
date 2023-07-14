@@ -50,11 +50,19 @@ class ProductViewSet(viewsets.ReadOnlyModelViewSet):
     
 
 class AvailableColorsAPIView(APIView):
+    @extend_schema(
+        description='Get all available colors',
+        responses={}        
+    )
     def get(self, request):
         colors = ProductVariant.objects.exclude(color__isnull=True).values_list('color', flat=True).distinct()
         return Response(colors)
     
 class AvailableSizesAPIView(APIView):
+    @extend_schema(
+        description='Get all available sizes',
+        responses={}
+    )
     def get(self, request):
         sizes = ProductVariant.objects.exclude(size__isnull=True).values_list('size', flat=True).distinct()
         return Response(sizes)

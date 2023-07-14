@@ -1,0 +1,86 @@
+
+1. primero se hace una peticion para registrar el usuario
+
+POST
+/auth/users/
+{
+  "username": "yotiño",
+  "email": "yotoelectronics@gmail.com",
+  "password": "passwordS.-"
+}
+
+2. El usuario recibe un correo de activacion con un link
+/activate/{uid}/{token}
+donde 
+/activate/MjA/br8o5n-e68af6e0607d6f9e54814ab17aee829e
+
+se debe capturar el uid y el token y hacer una una peticion post a
+POST
+/auth/users/activation/
+{
+  "uid": "string",
+  "token": "string"
+}
+
+si ocurrio un error puede volver a solicitar un correo de activación en
+POST
+/auth/users/resend_activation/
+{
+  "email": "yotoelectroni.c.s@gmail.com"
+}
+si ya está activado o el correo no está registrado como usuario dará error 400
+sino lo enviara cuantas veces sea necesario
+cualquiera de los token que reciba le funcionara
+
+3. Una vez activado puede iniciar sesión.
+POST
+/auth/jwt/create/
+{
+  "email": "yotoelectronics@gmail.com",
+  "password": "passwordS.-"
+}
+
+repsuesta:
+{
+  "access": "string",
+  "refresh": "string"
+}
+
+=========================================================
+
+Resetear contraseña:
+
+POST
+/auth/users/reset_password/
+{
+  "email"
+}
+enviara un mail con
+/password/reset/confirm/MTg/br8ox8-4d4585b81bd9ccbe145f01fea051eda4
+/password/reset/confirm/{uid}/{token}
+
+luego hacer la peticion para resetear con
+POST
+/auth/users/reset_password_confirm/
+{
+  "uid": "string",
+  "token": "string",
+  "new_password": "string"
+}
+
+
+
+==============
+para verificar el token:
+POST
+/auth/jwt/verify/
+{
+  "token"
+}
+respuesta 200
+
+para saber mi informacion
+GET
+/auth/users/me/
+
+
