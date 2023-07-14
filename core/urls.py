@@ -29,6 +29,8 @@ from product.reports import generate_product_report
 
 from newsletter.views import SubscriberCreateAPIView
 
+from customer.views import CustomerActive
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(routing.router.urls)),
@@ -56,6 +58,9 @@ urlpatterns = [
     
     # Subscriber endpoints
     path('api/subscriber/', SubscriberCreateAPIView.as_view(), name='subscriber'),
+    
+    # user activation confirm endpoint
+    path('auth/user/confirm-activation/<str:email>', CustomerActive.as_view(), name='confirm-activation'),
     
     # # Djoser Endpoints
     re_path(r'^auth/', include('djoser.urls')),

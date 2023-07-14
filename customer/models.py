@@ -21,7 +21,3 @@ class Customer(AbstractUser):
     class Meta:
         verbose_name = 'Customer'
         verbose_name_plural = 'Customers'
-
-    
-class Whishlist(models.Model):
-    customer = models.ForeignKey('Customer', on_delete=models.CASCADE)

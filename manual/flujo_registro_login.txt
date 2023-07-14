@@ -84,3 +84,13 @@ GET
 /auth/users/me/
 
 
+=============
+hacer una peticion recurrente (1s) a este endpoind con el email para que cuando
+se active pasarlo al login de una vez
+GET
+/auth/user/confirm-activation/{email}
+respuesta 200
+{
+  "email": "string",
+  "is_active": true
+}

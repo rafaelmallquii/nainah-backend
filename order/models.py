@@ -31,6 +31,7 @@ class Order(models.Model):
     state = models.CharField(max_length=100)
     postcode = models.CharField(max_length=10)
     country = models.CharField(max_length=100, default='United States of America')
+    note = models.TextField(blank=True, null=True)
     paid = models.BooleanField(default=False)
     
     delivery_option = models.CharField(

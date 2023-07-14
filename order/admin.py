@@ -29,7 +29,7 @@ class OrderAdmin(admin.ModelAdmin):
     search_fields = ['paid', 'status']
     list_filter = ['paid', 'status']
     list_per_page = 10
-    readonly_fields = ['sub_total', 'tax', 'discount', 'shipping_charge', '_total',]
+    readonly_fields = ['note', 'sub_total', 'tax', 'discount', 'shipping_charge', '_total',]
     exclude = ['total']
     search_fields = ['customer__email',]
     
