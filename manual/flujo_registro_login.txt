@@ -94,3 +94,19 @@ respuesta 200
   "email": "string",
   "is_active": true
 }
+
+========= actualizar infromacion del usuario ===========
+PATCH
+/auth/users/me/
+{
+  "first_name": "Yonathan",
+  "last_name": "Soto",
+
+  "phone": "935119585",
+  "address_line_1": "line 1",
+  "address_line_2": "line 2",
+  "city": "lima",
+  "state": "lima",
+  "postcode": "40001",
+  "country": "peru"
+}

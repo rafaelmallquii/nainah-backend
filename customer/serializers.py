@@ -24,6 +24,8 @@ class UpdateUserSerializer(serializers.ModelSerializer):
         fields = '__all__'
         extra_kwargs = {
             'password': {'read_only': True},
+            'username': {'read_only': True},
+            'email': {'read_only': True},
             'is_active': {'read_only': True},
             'is_staff': {'read_only': True},
             'is_superuser': {'read_only': True},

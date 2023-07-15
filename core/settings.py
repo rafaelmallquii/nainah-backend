@@ -371,5 +371,4 @@ DJOSER = {
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(days=1),  # Life time token (1 day)
-
 }
