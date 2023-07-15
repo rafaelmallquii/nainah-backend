@@ -20,8 +20,6 @@ from core import settings
 from django.conf.urls.static import static
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
 from core import routing
-
-from order.views import OrderView
 from order.reports import order_pdf
 
 from product.views import AvailableColorsAPIView, AvailableSizesAPIView
@@ -34,8 +32,6 @@ from customer.views import CustomerActive
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(routing.router.urls)),
-
-    # path('order/', OrderView.as_view(), name='order'),
     
     # debug toolbar
     # path("__debug__/", include("debug_toolbar.urls")),
