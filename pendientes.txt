@@ -26,3 +26,12 @@ agregarle el descuento a la orden y configurarlo en el pdf y tambien las notas p
  # wishlist define
 
 # capturar ip en order
+
+
+# crear perfil de usuario en figma
+# crear checkout en figma
+# crear vista de order
+
+# endpoints checkout
+# endpoints de order
+# endpoints de catalogs -- proccess

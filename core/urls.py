@@ -25,6 +25,8 @@ from order.reports import order_pdf
 from product.views import AvailableColorsAPIView, AvailableSizesAPIView
 from product.reports import generate_product_report
 
+from catalog.views import CatalogAll
+
 from newsletter.views import SubscriberCreateAPIView
 
 from customer.views import CustomerActive
@@ -54,6 +56,9 @@ urlpatterns = [
     
     # Subscriber endpoints
     path('api/subscriber/', SubscriberCreateAPIView.as_view(), name='subscriber'),
+    
+    # Catalog endpoints
+    path('api/catalog/', CatalogAll.as_view(), name='catalog'),
     
     # user activation confirm endpoint
     path('auth/user/confirm-activation/<str:email>', CustomerActive.as_view(), name='confirm-activation'),

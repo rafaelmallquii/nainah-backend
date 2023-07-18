@@ -9,6 +9,7 @@ class Catalog(models.Model):
     description = models.TextField()
     banner = models.ImageField(upload_to='catalog/banner', blank=True, null=True)
     show_quantity = models.PositiveIntegerField(default=8, choices=((4,4),(8,8)), help_text='Show quantity of products in catalog?')
+    products = models.ManyToManyField(Product, blank=True, related_name='catalogs')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -25,15 +26,3 @@ class Catalog(models.Model):
         verbose_name = 'Catalog'
         verbose_name_plural = 'Catalogs'
         ordering = ['order']
-        
-class ProductCatalog(models.Model):
-    catalog = models.ForeignKey(Catalog, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    
-    def __str__(self):
-        return f'{self.catalog.name} - {self.product.title}'
-
-    class Meta:
-        verbose_name = 'Product Catalog'
-        verbose_name_plural = 'Product Catalogs'
-        ordering = ['-catalog']

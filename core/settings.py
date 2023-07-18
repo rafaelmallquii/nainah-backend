@@ -272,7 +272,7 @@ JAZZMIN_UI_TWEAKS = {
     "sidebar_nav_child_indent": False,
     "sidebar_nav_compact_style": True,
     "sidebar_nav_legacy_style": False,
-    "sidebar_nav_flat_style": False,
+    "sidebar_nav_flat_style": True,
     "theme": "default",
     "dark_mode_theme": None,
     "button_classes": {
@@ -283,7 +283,7 @@ JAZZMIN_UI_TWEAKS = {
         "danger": "btn-outline-danger",
         "success": "btn-outline-success"
     },
-    'actions_sticky_top': True,
+    "actions_sticky_top": True
 }
 
 # default auth user model
