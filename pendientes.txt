@@ -14,24 +14,31 @@ implementar pasarela de pago
 
 refound (pasarela)
 
-calcular descuento en %
+calcular descuento en % -- success
 
-calcular impuestos para cada estado (listo)
+calcular impuestos para cada estado -- success
 
 agregarle el descuento a la orden y configurarlo en el pdf y tambien las notas pendientes
 
 
  == customer ==
- # send mail with activation link and username and password
- # wishlist define
+ # send mail with activation link and username and password -- pending
+ # wishlist define -- pending
 
-# capturar ip en order
+# capturar ip en order -- pending
 
 
-# crear perfil de usuario en figma
-# crear checkout en figma
-# crear vista de order
+# crear perfil de usuario en figma -- success
+# crear checkout en figma -- pending
+# crear vista de order-- pending
 
-# endpoints checkout
-# endpoints de order
-# endpoints de catalogs -- proccess
+# endpoints checkout -- pending
+# endpoints de order -- pending
+# endpoints de catalogs -- success
+# agregar el cupon en las vistas del checkout -- pending
+
+
+# add /privacy-policy/
+# add /shipping-policy/
+# add /terms-and-conditions/
+# add /returns-and-refunds-policy/
