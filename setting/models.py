@@ -1,9 +1,6 @@
 from django.db import models
-# import valationError
 from django.core.exceptions import ValidationError
 from colorfield.fields import ColorField
-
-# Create your models here.
 
 class Setting(models.Model):
     site_name = models.CharField(max_length=100)
@@ -99,3 +96,53 @@ class Size(models.Model):
 
     def __str__(self):
         return f'{self.name}'
+
+class AboutUs(models.Model):
+    setting = models.OneToOneField(Setting, on_delete=models.CASCADE)
+    content = models.TextField()
+    
+    def __str__(self):
+        return 'About Us'
+    
+    class Meta:
+        verbose_name_plural = 'About Us'
+
+class PrivacyPolicy(models.Model):
+    setting = models.OneToOneField(Setting, on_delete=models.CASCADE)
+    content = models.TextField()
+    
+    def __str__(self):
+        return 'Privacy Policy'
+    
+    class Meta:
+        verbose_name_plural = 'Privacy Policy'
+
+class ShippingPolicy(models.Model):
+    setting = models.OneToOneField(Setting, on_delete=models.CASCADE)
+    content = models.TextField()
+    
+    def __str__(self):
+        return 'Shipping Policy'
+    
+    class Meta:
+        verbose_name_plural = 'Shipping Policy'
+
+class TermsAndConditions(models.Model):
+    setting = models.OneToOneField(Setting, on_delete=models.CASCADE)
+    content = models.TextField()
+    
+    def __str__(self):
+        return 'Terms and Conditions'
+    
+    class Meta:
+        verbose_name_plural = 'Terms and Conditions'
+        
+class ReturnsAndRefundsPolicy(models.Model):
+    setting = models.OneToOneField(Setting, on_delete=models.CASCADE)
+    content = models.TextField()
+    
+    def __str__(self):
+        return 'Returns and Refunds Policy'
+    
+    class Meta:
+        verbose_name_plural = 'Returns and Refunds Policy'

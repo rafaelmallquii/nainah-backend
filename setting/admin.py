@@ -1,6 +1,48 @@
 from django.contrib import admin
 from .models import Setting, Currency, TaxAndShipment, SiteMeta, Color, Size
 import easy
+from django_summernote.widgets import SummernoteWidget
+
+from .models import (
+    AboutUs,
+    PrivacyPolicy,
+    ShippingPolicy,
+    TermsAndConditions,
+    ReturnsAndRefundsPolicy,
+)
+
+from .forms import (
+    AboutUsAdminForm,
+    PrivacyPolicyAdminForm,
+    ShippingPolicyAdminForm,
+    TermsAndConditionsAdminForm,
+    ReturnsAndRefundsPolicyAdminForm,
+)
+
+class InlineAboutUs(admin.StackedInline):
+    model = AboutUs
+    extra = 1
+    form = AboutUsAdminForm
+    
+class InlinePrivacyPolicy(admin.StackedInline):
+    model = PrivacyPolicy
+    extra = 1
+    form = PrivacyPolicyAdminForm
+    
+class InlineShippingPolicy(admin.StackedInline):
+    model = ShippingPolicy
+    extra = 1
+    form = ShippingPolicyAdminForm
+    
+class InlineTermsAndConditions(admin.StackedInline):
+    model = TermsAndConditions
+    extra = 1
+    form = TermsAndConditionsAdminForm
+
+class InlineReturnsAndRefundsPolicy(admin.StackedInline):
+    model = ReturnsAndRefundsPolicy
+    extra = 1
+    form = ReturnsAndRefundsPolicyAdminForm
 
 class InlineSiteMeta(admin.StackedInline):
     model = SiteMeta
@@ -31,6 +73,11 @@ class SettingAdmin(admin.ModelAdmin):
         InlineSiteMeta,
         InlineColor,
         InlineSize,
+        InlineAboutUs,
+        InlinePrivacyPolicy,
+        InlineShippingPolicy,
+        InlineTermsAndConditions,
+        InlineReturnsAndRefundsPolicy,
     ]
     list_display = ('site_name', 'site_description', 'logo')
     
