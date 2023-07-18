@@ -1,6 +1,7 @@
 from django.db import models
 # import valationError
 from django.core.exceptions import ValidationError
+from colorfield.fields import ColorField
 
 # Create your models here.
 
@@ -82,3 +83,19 @@ class SiteMeta(models.Model):
 
     class Meta:
         verbose_name_plural = 'Site Meta'
+        
+
+class Color(models.Model):
+    setting = models.ForeignKey(Setting, on_delete=models.CASCADE)
+    code = ColorField(default='#FFFFFF')
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return f'{self.name}'
+    
+class Size(models.Model):
+    setting = models.ForeignKey(Setting, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return f'{self.name}'

@@ -1,5 +1,5 @@
 from django.db import models
-from product.models import Product
+from product.models import Product, ProductVariant
 
 # Create your models here.
 
@@ -9,7 +9,7 @@ class Catalog(models.Model):
     description = models.TextField()
     banner = models.ImageField(upload_to='catalog/banner', blank=True, null=True)
     show_quantity = models.PositiveIntegerField(default=8, choices=((4,4),(8,8)), help_text='Show quantity of products in catalog?')
-    products = models.ManyToManyField(Product, blank=True, related_name='catalogs')
+    products = models.ManyToManyField(ProductVariant, blank=True, related_name='catalog_products')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

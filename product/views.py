@@ -55,7 +55,9 @@ class AvailableColorsAPIView(APIView):
         responses={}        
     )
     def get(self, request):
-        colors = ProductVariant.objects.exclude(color__isnull=True).values_list('color', flat=True).distinct()
+        colors = ProductVariant.objects.exclude(color__isnull=True).values_list('color__code', flat=True).distinct()
+
+        
         return Response(colors)
     
 class AvailableSizesAPIView(APIView):
@@ -64,5 +66,5 @@ class AvailableSizesAPIView(APIView):
         responses={}
     )
     def get(self, request):
-        sizes = ProductVariant.objects.exclude(size__isnull=True).values_list('size', flat=True).distinct()
+        sizes = ProductVariant.objects.exclude(size__isnull=True).values_list('size__name', flat=True).distinct()
         return Response(sizes)

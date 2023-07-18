@@ -25,6 +25,7 @@ class Order(models.Model):
     email = models.EmailField()
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
+    phone = models.CharField(max_length=20)
     address_line_1 = models.CharField(max_length=100)
     address_line_2 = models.CharField(max_length=100, default='', blank=True)
     city = models.ForeignKey(TaxAndShipment, on_delete=models.PROTECT, help_text='Select City.')

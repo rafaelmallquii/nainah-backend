@@ -3,11 +3,8 @@ from .utils import validator_price
 from ckeditor.fields import RichTextField
 from category.models import Category
 from django.utils.safestring import mark_safe
+from setting.models import Color, Size
 
-from .choices import (
-    SIZE_CHOICES,
-    COLOR_CHOICES
-)
 
 from .seeds import (
     DEFAULT_DESCRIPTION,
@@ -28,7 +25,7 @@ class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.PROTECT, default=DEFAULT_CATEGORY)
     tags = models.ManyToManyField(Tag, blank=True, help_text='Select tags for this product')
     
-    title = models.CharField(max_length=100, default=DEFAULT_TITLE)
+    title = models.CharField(max_length=100, default=DEFAULT_TITLE, unique=True)
     description = RichTextField(default=DEFAULT_DESCRIPTION)
 
     image = models.ImageField(upload_to='images/products')
@@ -65,8 +62,8 @@ class Product(models.Model):
 class ProductVariant(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
-    color = models.CharField(max_length=100,choices=COLOR_CHOICES, blank=True, null=True)
-    size = models.CharField(max_length=100, choices=SIZE_CHOICES, blank=True, null=True)
+    color = models.ForeignKey(Color, on_delete=models.PROTECT, blank=True, null=True)
+    size = models.ForeignKey(Size, on_delete=models.PROTECT, blank=True, null=True)
     stock = models.IntegerField(default=1, help_text='Stock of this variant')
     price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00, validators=[validator_price])
     sale_price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
@@ -76,17 +73,7 @@ class ProductVariant(models.Model):
         return mark_safe(f'<img src="{self.image.url}" width="200" id="image-preview" />')
 
     def __str__(self):
-        return f'{self.title} - {self.color} - {self.size}" - ${self.price}'
-
-# class ProductImage(models.Model):
-#     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-#     image = models.ImageField(upload_to='images/products')
-
-#     def __str__(self):
-#         return self.product.title
-    
-#     def current_image(self):
-#         return mark_safe(f'<img src="{self.image.url}" width="200" id="" />')
+        return f'{self.title} - " - ${self.price}'
 
 class MetaAttribute(models.Model):
     product = models.OneToOneField(Product, on_delete=models.CASCADE)

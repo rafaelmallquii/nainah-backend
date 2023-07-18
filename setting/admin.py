@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Setting, Currency, TaxAndShipment, SiteMeta
+from .models import Setting, Currency, TaxAndShipment, SiteMeta, Color, Size
 import easy
 
 class InlineSiteMeta(admin.StackedInline):
@@ -13,6 +13,14 @@ class InlineTax(admin.TabularInline):
 class InlineCurrency(admin.StackedInline):
     model = Currency
     extra = 1
+    
+class InlineColor(admin.TabularInline):
+    model = Color
+    extra = 1
+
+class InlineSize(admin.TabularInline):
+    model = Size
+    extra = 1
 
 @admin.register(Setting)
 class SettingAdmin(admin.ModelAdmin):
@@ -21,6 +29,8 @@ class SettingAdmin(admin.ModelAdmin):
         InlineCurrency,
         InlineTax,
         InlineSiteMeta,
+        InlineColor,
+        InlineSize,
     ]
     list_display = ('site_name', 'site_description', 'logo')
     

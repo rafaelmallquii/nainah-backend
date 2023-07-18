@@ -1,7 +1,7 @@
-from customer.models import Customer
 from django.core.files import File
 from django.core.management.base import BaseCommand
-from setting.models import Setting, SiteMeta, TaxAndShipment, Currency
+from setting.models import Setting, SiteMeta, TaxAndShipment, Currency, Size, Color
+from customer.models import Customer
 import os
 
 
@@ -31,7 +31,7 @@ CITY_TAXES = (
     ('Michigan', '6.00', '0.00'),
     ('Minnesota', '6.875', '0.00'),
     ('Mississippi', '7.00', '0.00'),
-    ('Missouri', '4.225', '0.00'),
+    ('Missouri', '4.225', '0.00'), 
     ('Montana (d)', '0.00', '0.00'),
     ('Nebraska', '5.50', '0.00'),
     ('Nevada', '6.85', '0.00'),
@@ -58,6 +58,53 @@ CITY_TAXES = (
     ('West Virginia', '6.00', '0.00'),
     ('Wisconsin', '5.00', '0.00'),
     ('Wyoming', '4.00', '0.00'),
+)
+
+SIZE_CHOICES = (
+    ('5', '5'),
+    # ('5.5', '5.5'),
+    ('6', '6'),
+    # ('6.5', '6.5'),
+    ('7', '7'),
+    # ('7.5', '7.5'),
+    ('8', '8'),
+    # ('8.5', '8.5'),
+    ('9', '9'),
+    # ('9.5', '9.5'),
+    ('10', '10'),
+    ('11', '11'),
+    # ('11.5', '11.5'),
+    ('12', '12'),
+    # ('12.5', '12.5'),
+    ('13', '13'),
+    # ('13.5', '13.5'),
+    ('14', '14'),
+    # ('14.5', '14.5'),
+    ('15', '15'),
+)
+
+COLOR_CHOICES = (
+    ('#000000', 'Black'),
+    ('#FFFFFF', 'White'),
+    ('#FF0000', 'Red'),
+    ('#0000FF', 'Blue'),
+    ('#00FF00', 'Green'),
+    ('#FFFF00', 'Yellow'),
+    ('#FFA500', 'Orange'),
+    ('#800080', 'Purple'),
+    ('#FFC0CB', 'Pink'),
+    ('#A52A2A', 'Brown'),
+    ('#808080', 'Grey'),
+    ('#C0C0C0', 'Silver'),
+    ('#FFD700', 'Gold'),
+    ('#F5F5DC', 'Beige'),
+    ('#CD7F32', 'Bronze'),
+    ('#B87333', 'Copper'),
+    ('#FFFDD0', 'Cream'),
+    ('#000080', 'Navy'),
+    ('#D2B48C', 'Tan'),
+    ('#40E0D0', 'Turquoise'),
+    ('#FFFFF0', 'Other'),
 )
 
 class Command(BaseCommand):
@@ -126,6 +173,21 @@ class Command(BaseCommand):
                 shipment_amount=shipment_amount,
             )
             
+        # # Size initial
+        for size in SIZE_CHOICES:
+            Size.objects.create(
+                setting=setting,
+                name=size[0],
+            )
+        
+        # # Color initial
+        for color in COLOR_CHOICES:
+            Color.objects.create(
+                setting=setting,
+                name=color[1],
+                code=color[0],
+            )
+        
         self.stdout.write(self.style.SUCCESS('Initial settings created successfully.'))
         
 # exectute the command in the terminal

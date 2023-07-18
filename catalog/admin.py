@@ -11,3 +11,5 @@ class CatalogAdmin(SortableAdminMixin, admin.ModelAdmin):
     list_display = ['order', 'name', 'description', 'created_at', 'updated_at']
     search_fields = ['name', 'description']
     # inlines = [ProductCatalogInline]
+
+    filter_horizontal = ('products',)
