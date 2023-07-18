@@ -219,3 +219,9 @@ label[for="id_content"] {
   justify-content: center !important;
   align-items: center !important;
 }
+
+.user-panel {
+  /* change size text and lower */
+  font-size: 12px !important;
+  /* text-transform: lowercase !important; */
+}
