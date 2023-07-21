@@ -46,7 +46,7 @@ class CustomUserViewSet(UserViewSet):
 
         if user:
             if user.is_active:
-                return Response({"detail": "This user is already active."}, status=status.HTTP_400_BAD_REQUEST)
+                return Response({"detail": "This user is already active, please Login."}, status=status.HTTP_400_BAD_REQUEST)
         else:
             return Response({"detail": "No user found with this email."}, status=status.HTTP_400_BAD_REQUEST)
         
