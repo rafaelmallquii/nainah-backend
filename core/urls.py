@@ -22,7 +22,7 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, Spec
 from core import routing
 from order.reports import order_pdf
 
-from product.views import AvailableColorsAPIView, AvailableSizesAPIView
+from product.views import AvailableColorsAPIView, AvailableSizesAPIView, ProductRelatedByTitleWithSometagsAPIView
 from product.reports import generate_product_report
 
 from catalog.views import CatalogAll
@@ -53,7 +53,7 @@ urlpatterns = [
     # product endpoints
     path('api/colors/', AvailableColorsAPIView.as_view(), name='colors'),
     path('api/sizes/', AvailableSizesAPIView.as_view(), name='sizes'),
-    
+    path('api/related-products/<str:title>/', ProductRelatedByTitleWithSometagsAPIView.as_view(), name='related-products'),
     # Subscriber endpoints
     path('api/subscriber/', SubscriberCreateAPIView.as_view(), name='subscriber'),
     

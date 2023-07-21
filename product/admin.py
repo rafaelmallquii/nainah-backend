@@ -16,7 +16,6 @@ class ProductVariantInline(admin.StackedInline):
 
     readonly_fields = ['current_image',]
 
-
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     form = ProductForm
@@ -61,7 +60,6 @@ class ProductAdmin(admin.ModelAdmin):
         else:
             queryset, use_distinct = super().get_search_results(request, queryset, search_term)
         return queryset, use_distinct
-    
     
     def make_trending(self, request, queryset):
         queryset.update(trending=True)

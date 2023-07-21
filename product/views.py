@@ -56,8 +56,6 @@ class AvailableColorsAPIView(APIView):
     )
     def get(self, request):
         colors = ProductVariant.objects.exclude(color__isnull=True).values_list('color__code', flat=True).distinct()
-
-        
         return Response(colors)
     
 class AvailableSizesAPIView(APIView):
@@ -68,3 +66,14 @@ class AvailableSizesAPIView(APIView):
     def get(self, request):
         sizes = ProductVariant.objects.exclude(size__isnull=True).values_list('size__name', flat=True).distinct()
         return Response(sizes)
+    
+class ProductRelatedByTitleWithSometagsAPIView(APIView):
+    @extend_schema(
+        description='Get related products by title and some tags',
+        responses={}
+    )
+    def get(self, request, title):
+        products = Product.objects.filter(tags__name__in=Product.objects.filter(title=title).values_list('tags__name', flat=True)).exclude(title=title).distinct()
+        print(products.query)
+        serializer = ProductSerializer(products, many=True)
+        return Response(serializer.data)
