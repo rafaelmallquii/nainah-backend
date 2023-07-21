@@ -29,7 +29,7 @@ from catalog.views import CatalogAll
 
 from newsletter.views import SubscriberCreateAPIView
 
-from customer.views import CustomerActive
+from customer.views import CustomUserViewSet
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -60,8 +60,11 @@ urlpatterns = [
     # Catalog endpoints
     path('api/catalog/', CatalogAll.as_view(), name='catalog'),
     
-    # user activation confirm endpoint
-    path('auth/user/confirm-activation/<str:email>', CustomerActive.as_view(), name='confirm-activation'),
+    # user activation resend endpoint
+    path('auth/user/full-resend-activation/', CustomUserViewSet.as_view({'post': 'resend_activation'}), name='resend-activation-new'),
+    
+    # user custom resend activation email
+
     
     # # Djoser Endpoints
     re_path(r'^auth/', include('djoser.urls')),

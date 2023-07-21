@@ -74,6 +74,5 @@ class ProductRelatedByTitleWithSometagsAPIView(APIView):
     )
     def get(self, request, title):
         products = Product.objects.filter(tags__name__in=Product.objects.filter(title=title).values_list('tags__name', flat=True)).exclude(title=title).distinct()
-        print(products.query)
         serializer = ProductSerializer(products, many=True)
         return Response(serializer.data)

@@ -35,3 +35,19 @@ class CustomerActive(generics.ListAPIView):
                 return Response({'message': 'No active'},status=status.HTTP_404_NOT_FOUND)
         except Customer.DoesNotExist:
             return Response({'message': 'Email not register'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+from djoser.views import UserViewSet
+from djoser import utils
+from djoser.compat import get_user_email
+
+class CustomUserViewSet(UserViewSet):
+    def resend_activation(self, request):
+        user = Customer.objects.filter(email=request.data.get('email')).first()
+
+        if user:
+            if user.is_active:
+                return Response({"detail": "This user is already active."}, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response({"detail": "No user found with this email."}, status=status.HTTP_400_BAD_REQUEST)
+        
+        return super().resend_activation(request)
